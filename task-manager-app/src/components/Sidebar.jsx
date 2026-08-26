@@ -22,6 +22,10 @@ export function Sidebar({ tasks }) {
             `workspace-item${isActive ? " active" : ""}`
           }
         >
+          <span
+            className="sidebar-link-icon sidebar-link-icon-all"
+            aria-hidden="true"
+          />
           <span>All tasks</span>
           <span className="count">{tasks.length}</span>
         </NavLink>
@@ -32,8 +36,14 @@ export function Sidebar({ tasks }) {
             `workspace-item${isActive ? " active" : ""}`
           }
         >
+          <span
+            className="sidebar-link-icon sidebar-link-icon-active"
+            aria-hidden="true"
+          />
           <span>Active</span>
-          <span className="count">{tasks.filter((task) => !task.completed).length}</span>
+          <span className="count">
+            {tasks.filter((task) => !task.completed).length}
+          </span>
         </NavLink>
 
         <NavLink
@@ -42,8 +52,14 @@ export function Sidebar({ tasks }) {
             `workspace-item${isActive ? " active" : ""}`
           }
         >
+          <span
+            className="sidebar-link-icon sidebar-link-icon-completed"
+            aria-hidden="true"
+          />
           <span>Completed</span>
-          <span className="count">3</span>
+          <span className="count">
+            {tasks.filter((task) => task.completed).length}
+          </span>
         </NavLink>
 
         <NavLink
@@ -52,6 +68,10 @@ export function Sidebar({ tasks }) {
             `workspace-item${isActive ? " active" : ""}`
           }
         >
+          <span
+            className="sidebar-link-icon sidebar-link-icon-overdue"
+            aria-hidden="true"
+          />
           <span>Overdue</span>
           <span className="count">0</span>
         </NavLink>

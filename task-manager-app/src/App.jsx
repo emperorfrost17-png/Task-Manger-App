@@ -23,7 +23,7 @@ function App() {
         "Share the revised timing and ask for a final read before Thursday.",
       priority: "HIGH",
       dueDate: "Aug 29",
-      completed: false,
+      completed: true,
     },
     {
       id: crypto.randomUUID(),
