@@ -3,7 +3,7 @@ import { Sidebar } from "../../components/Sidebar";
 import { Header } from "../../components/Header";
 import "./AllTasks.css";
 
-export function AllTasks() {
+export function AllTasks({ tasks }) {
   return (
     <>
       <title>All Tasks</title>
@@ -37,57 +37,21 @@ export function AllTasks() {
               </div>
 
               <div className="task-list">
-                <article className="task-card">
-                  <span className="task-checkbox" aria-hidden="true" />
-                  <div>
-                    <h3>Outline next week's quiet hour</h3>
-                    <p>
-                      A small block for thinking before the calendar fills up.
-                    </p>
-                    <div className="task-meta">
-                      <span className="priority-tag">HIGH</span>
-                      <span>Jul 27</span>
-                    </div>
-                  </div>
-                </article>
-                <article className="task-card">
-                  <span className="task-checkbox" aria-hidden="true" />
-                  <div>
-                    <h3>Book a proper lunch break</h3>
-                    <p>
-                      Step away from the desk. The good ideas need a little room
-                      around them.
-                    </p>
-                    <div className="task-meta">
-                      <span className="priority-tag">HIGH</span>
-                      <span>Tomorrow</span>
-                    </div>
-                  </div>
-                </article>
-                <article className="task-card">
-                  <span className="task-checkbox" aria-hidden="true" />
-                  <div>
-                    <h3>Reply to Mira about the launch plan</h3>
-                    <p>
-                      Share the revised timing and ask for a final read before
-                      Thursday.
-                    </p>
-                    <div className="task-meta">
-                      <span className="priority-tag">HIGH</span>
-                      <span>Aug 29</span>
-                    </div>
-                  </div>
-                </article>
-                <article className="task-card">
-                  <span className="task-checkbox" aria-hidden="true" />
-                  <div>
-                    <h3>Send the studio invoice</h3>
-                    <div className="task-meta">
-                      <span className="priority-tag">HIGH</span>
-                      <span>Sep 4</span>
-                    </div>
-                  </div>
-                </article>
+                {tasks.map((task) => {
+                  return (
+                    <article className="task-card">
+                      <span className="task-checkbox" aria-hidden="true" />
+                      <div>
+                        <h3>{task.title}</h3>
+                        <p>{task.description}</p>
+                        <div className="task-meta">
+                          <span className="priority-tag">{task.priority}</span>
+                          <span>{task.dueDate}</span>
+                        </div>
+                      </div>
+                    </article>
+                  );
+                })}
               </div>
             </section>
 

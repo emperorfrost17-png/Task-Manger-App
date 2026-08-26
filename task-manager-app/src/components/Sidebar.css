@@ -1,11 +1,11 @@
 .sidebar {
-  width: 290px;
-  min-width: 290px;
+  width: 250px;
+  min-width: 250px;
   background: #30233a;
   color: #f8f1e7;
   display: flex;
   flex-direction: column;
-  padding: 18px 16px 14px;
+  padding: 18px 14px 14px;
   box-sizing: border-box;
   border-right: 1px solid rgba(255, 255, 255, 0.08);
 }
@@ -13,8 +13,8 @@
 .brand-box {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 18px;
+  gap: 9px;
+  margin-bottom: 22px;
 }
 
 .brand-mark {
@@ -36,13 +36,13 @@
 
 .brand-text {
   font-weight: 700;
-  font-size: 1.1rem;
+  font-size: 1rem;
   letter-spacing: 0.04em;
   text-transform: lowercase;
 }
 
 .brand-tagline {
-  font-size: 0.7rem;
+  font-size: 0.58rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.5);
@@ -52,13 +52,13 @@
 .workspace-button {
   width: 100%;
   border: 0;
-  border-radius: 12px;
+  border-radius: 11px;
   background: #ffb51b;
   color: #30233a;
   font-family: inherit;
   font-weight: 700;
-  font-size: 1.1rem;
-  padding: 12px 14px;
+  font-size: 0.92rem;
+  padding: 10px 12px;
   cursor: pointer;
   margin-bottom: 20px;
   transition:
@@ -84,7 +84,7 @@
 }
 
 .workspace-label {
-  font-size: 0.76rem;
+  font-size: 0.64rem;
   letter-spacing: 0.18em;
   color: rgba(255, 255, 255, 0.52);
   text-transform: uppercase;
@@ -98,13 +98,19 @@
   padding: 9px 10px;
   border-radius: 10px;
   color: rgba(255, 255, 255, 0.8);
-  font-size: 1rem;
+  font-size: 0.84rem;
   margin: 4px 0;
   cursor: pointer;
+  text-decoration: none;
   transition:
     background-color 160ms ease,
     color 160ms ease,
     transform 160ms ease;
+}
+
+.workspace-item:focus-visible {
+  outline: 2px solid #ffcf5b;
+  outline-offset: 2px;
 }
 
 .workspace-item:hover {
@@ -154,7 +160,7 @@
 .sidebar-footer-card p {
   margin: 0;
   line-height: 1.4;
-  font-size: 0.95rem;
+  font-size: 0.82rem;
 }
 
 .user-box {
@@ -185,7 +191,7 @@
 }
 
 .user-name {
-  font-size: 0.88rem;
+  font-size: 0.78rem;
   font-weight: 600;
 }
 

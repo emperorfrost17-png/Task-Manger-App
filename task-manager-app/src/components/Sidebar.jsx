@@ -1,4 +1,5 @@
 import "./Sidebar.css";
+import { NavLink } from "react-router";
 
 export function Sidebar() {
   return (
@@ -15,26 +16,45 @@ export function Sidebar() {
 
       <div className="sidebar-panel">
         <div className="workspace-label">Your workspace</div>
-
-        <div className="workspace-item active">
+        <NavLink
+          to="/"
+          className={({ isActive }) =>
+            `workspace-item${isActive ? " active" : ""}`
+          }
+        >
           <span>All tasks</span>
           <span className="count">4</span>
-        </div>
+        </NavLink>
 
-        <div className="workspace-item">
+        <NavLink
+          to="/active"
+          className={({ isActive }) =>
+            `workspace-item${isActive ? " active" : ""}`
+          }
+        >
           <span>Today</span>
           <span className="count">0</span>
-        </div>
+        </NavLink>
 
-        <div className="workspace-item">
+        <NavLink
+          to="/completed"
+          className={({ isActive }) =>
+            `workspace-item${isActive ? " active" : ""}`
+          }
+        >
           <span>Upcoming</span>
           <span className="count">3</span>
-        </div>
+        </NavLink>
 
-        <div className="workspace-item">
+        <NavLink
+          to="/overdue"
+          className={({ isActive }) =>
+            `workspace-item${isActive ? " active" : ""}`
+          }
+        >
           <span>Completed</span>
           <span className="count">0</span>
-        </div>
+        </NavLink>
       </div>
 
       <div className="sidebar-footer-card">
