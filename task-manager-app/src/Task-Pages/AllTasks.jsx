@@ -1,5 +1,6 @@
 import AllTasksIcon from "../assets/all-tasks.png";
 import { Sidebar } from "../components/Sidebar";
+import { Header } from "../components/Header";
 
 export function AllTasks() {
   return (
@@ -10,9 +11,8 @@ export function AllTasks() {
       <div className="app-shell">
         <Sidebar />
         <main className="main-content">
-          <div className="workspace-area">
-            <h1>All Tasks</h1>
-          </div>
+          <Header />
+          <div className="workspace-area" />
         </main>
       </div>
     </>
