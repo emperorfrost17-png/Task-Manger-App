@@ -4,6 +4,7 @@ import { AllTasks } from "./Task-Pages/All-Tasks/AllTasks";
 import { ActiveTasks } from "./Task-Pages/ActiveTasks";
 import { CompletedTasks } from "./Task-Pages/CompletedTasks";
 import { OverdueTasks } from "./Task-Pages/OverdueTasks";
+import dayjs from "dayjs";
 import "./App.css";
 
 function App() {
@@ -13,7 +14,7 @@ function App() {
       title: "Outline next week's quiet hour",
       description: "A small block for thinking before the calendar fills up.",
       priority: "HIGH",
-      dueDate: "Jul 27",
+      dueDate: dayjs('2026-08-26').valueOf() ,
       completed: false,
     },
     {
@@ -22,7 +23,7 @@ function App() {
       description:
         "Share the revised timing and ask for a final read before Thursday.",
       priority: "HIGH",
-      dueDate: "Aug 29",
+      dueDate: dayjs('2026-08-29').valueOf() ,
       completed: true,
     },
     {
@@ -31,7 +32,7 @@ function App() {
       description:
         "Step away from the desk. The good ideas need a little room around them.",
       priority: "HIGH",
-      dueDate: "Aug 27",
+      dueDate: dayjs('2026-08-27').valueOf() ,
       completed: false,
     },
   ]);

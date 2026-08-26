@@ -1,5 +1,6 @@
 import { Sidebar } from "../components/Sidebar";
 import { Header } from "../components/Header";
+import dayjs from "dayjs";
 
 export function ActiveTasks({ tasks }) {
   return (
@@ -53,7 +54,7 @@ export function ActiveTasks({ tasks }) {
                             <span className="priority-tag">
                               {task.priority}
                             </span>
-                            <span>{task.dueDate}</span>
+                            <span>{dayjs(task.dueDate).format("MMM D")}</span>
                           </div>
                         </div>
                       </article>

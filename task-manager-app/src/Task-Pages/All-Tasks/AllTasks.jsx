@@ -2,6 +2,7 @@ import AllTasksIcon from "../../assets/all-tasks.png";
 import { Sidebar } from "../../components/Sidebar";
 import { Header } from "../../components/Header";
 import "./AllTasks.css";
+import dayjs from "dayjs";
 
 export function AllTasks({ tasks }) {
   return (
@@ -46,7 +47,7 @@ export function AllTasks({ tasks }) {
                         <p>{task.description}</p>
                         <div className="task-meta">
                           <span className="priority-tag">{task.priority}</span>
-                          <span>{task.dueDate}</span>
+                          <span>{dayjs(task.dueDate).format("MMM D")}</span>
                         </div>
                       </div>
                     </article>

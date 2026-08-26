@@ -1,9 +1,9 @@
 import { Header } from "../components/Header";
 import { Sidebar } from "../components/Sidebar";
+import dayjs from "dayjs";
 export function CompletedTasks({ tasks }) {
   return (
     <>
-      <>
       <title>Completed Tasks</title>
 
       <div className="app-shell">
@@ -53,7 +53,7 @@ export function CompletedTasks({ tasks }) {
                             <span className="priority-tag">
                               {task.priority}
                             </span>
-                            <span>{task.dueDate}</span>
+                            <span>{dayjs(task.dueDate).format("MMM D")}</span>
                           </div>
                         </div>
                       </article>
@@ -110,7 +110,5 @@ export function CompletedTasks({ tasks }) {
         </main>
       </div>
     </>
-    </>
-  )
-  
+  );
 }
