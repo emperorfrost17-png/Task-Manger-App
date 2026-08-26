@@ -7,7 +7,7 @@ export function AllTasks({ tasks }) {
   return (
     <>
       <title>All Tasks</title>
-      <link rel="icon" type="image/svg+xml" href={AllTasksIcon} />
+      
 
       <div className="app-shell">
         <Sidebar tasks={tasks} />
@@ -29,7 +29,7 @@ export function AllTasks({ tasks }) {
               <div className="task-section-heading">
                 <div>
                   <h2>All tasks</h2>
-                  <p>4 things in view</p>
+                  <p>{tasks.length} things in view</p>
                 </div>
                 <button className="add-task-link" type="button">
                   <span aria-hidden="true">+</span> Add task
@@ -39,7 +39,7 @@ export function AllTasks({ tasks }) {
               <div className="task-list">
                 {tasks.map((task) => {
                   return (
-                    <article className="task-card">
+                    <article className="task-card" key={task.id}>
                       <span className="task-checkbox" aria-hidden="true" />
                       <div>
                         <h3>{task.title}</h3>

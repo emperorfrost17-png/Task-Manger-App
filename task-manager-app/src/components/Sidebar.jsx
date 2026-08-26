@@ -33,7 +33,7 @@ export function Sidebar({ tasks }) {
           }
         >
           <span>Active</span>
-          <span className="count">0</span>
+          <span className="count">{tasks.filter((task) => !task.completed).length}</span>
         </NavLink>
 
         <NavLink
