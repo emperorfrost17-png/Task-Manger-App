@@ -107,7 +107,9 @@
   gap: 6px;
   background: #30233a;
   color: #fffaf2;
-  font: 700 0.84rem inherit;
+  font-family: inherit;
+  font-size: 0.84rem;
+  font-weight: 700;
   cursor: pointer;
   transition:
     background-color 160ms ease,

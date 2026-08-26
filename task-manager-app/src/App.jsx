@@ -1,6 +1,6 @@
 import "./App.css";
 import { Routes, Route } from "react-router";
-import { AllTasks } from "./Task-Pages/AllTasks";
+import { AllTasks } from "./Task-Pages/All-Tasks/AllTasks";
 
 function App() {
   return (
