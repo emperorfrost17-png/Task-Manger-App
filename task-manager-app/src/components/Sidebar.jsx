@@ -1,7 +1,7 @@
 import "./Sidebar.css";
 import { NavLink } from "react-router";
 
-export function Sidebar() {
+export function Sidebar({ tasks }) {
   return (
     <aside className="sidebar">
       <div className="brand-box">
@@ -23,7 +23,7 @@ export function Sidebar() {
           }
         >
           <span>All tasks</span>
-          <span className="count">4</span>
+          <span className="count">{tasks.length}</span>
         </NavLink>
 
         <NavLink
@@ -32,7 +32,7 @@ export function Sidebar() {
             `workspace-item${isActive ? " active" : ""}`
           }
         >
-          <span>Today</span>
+          <span>Active</span>
           <span className="count">0</span>
         </NavLink>
 
@@ -42,7 +42,7 @@ export function Sidebar() {
             `workspace-item${isActive ? " active" : ""}`
           }
         >
-          <span>Upcoming</span>
+          <span>Completed</span>
           <span className="count">3</span>
         </NavLink>
 
@@ -52,7 +52,7 @@ export function Sidebar() {
             `workspace-item${isActive ? " active" : ""}`
           }
         >
-          <span>Completed</span>
+          <span>Overdue</span>
           <span className="count">0</span>
         </NavLink>
       </div>

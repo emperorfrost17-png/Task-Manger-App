@@ -10,7 +10,7 @@ export function AllTasks({ tasks }) {
       <link rel="icon" type="image/svg+xml" href={AllTasksIcon} />
 
       <div className="app-shell">
-        <Sidebar />
+        <Sidebar tasks={tasks} />
         <main className="main-content">
           <Header />
           <div className="workspace-area">
