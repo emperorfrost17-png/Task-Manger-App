@@ -22,8 +22,8 @@ export function Sidebar({ tasks }) {
             `workspace-item${isActive ? " active" : ""}`
           }
         >
-          <span
-            className="sidebar-link-icon sidebar-link-icon-all"
+          <i
+            className="fa-solid fa-list sidebar-link-icon sidebar-link-icon-all"
             aria-hidden="true"
           />
           <span>All tasks</span>
@@ -36,8 +36,8 @@ export function Sidebar({ tasks }) {
             `workspace-item${isActive ? " active" : ""}`
           }
         >
-          <span
-            className="sidebar-link-icon sidebar-link-icon-active"
+          <i
+            className="fa-regular fa-clock sidebar-link-icon sidebar-link-icon-active"
             aria-hidden="true"
           />
           <span>Active</span>
@@ -52,8 +52,8 @@ export function Sidebar({ tasks }) {
             `workspace-item${isActive ? " active" : ""}`
           }
         >
-          <span
-            className="sidebar-link-icon sidebar-link-icon-completed"
+          <i
+            className="fa-regular fa-circle-check sidebar-link-icon sidebar-link-icon-completed"
             aria-hidden="true"
           />
           <span>Completed</span>
@@ -68,8 +68,8 @@ export function Sidebar({ tasks }) {
             `workspace-item${isActive ? " active" : ""}`
           }
         >
-          <span
-            className="sidebar-link-icon sidebar-link-icon-overdue"
+          <i
+            className="fa-solid fa-circle-exclamation sidebar-link-icon sidebar-link-icon-overdue"
             aria-hidden="true"
           />
           <span>Overdue</span>

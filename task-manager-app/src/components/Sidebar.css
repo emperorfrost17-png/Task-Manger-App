@@ -116,74 +116,16 @@
   color: currentColor;
   opacity: 0.78;
   transform: scale(1.3);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.sidebar-link-icon-all::before {
-  content: "";
-  position: absolute;
-  inset: 2px;
-  background: currentColor;
-  box-shadow:
-    0 4px currentColor,
-    4px 0 currentColor,
-    4px 4px currentColor;
-  width: 3px;
-  height: 3px;
-}
-
+.sidebar-link-icon-all,
 .sidebar-link-icon-active,
-.sidebar-link-icon-completed {
-  border: 1.5px solid currentColor;
-  border-radius: 50%;
-  box-sizing: border-box;
-}
-
-.sidebar-link-icon-active::before {
-  content: "";
-  position: absolute;
-  width: 1.5px;
-  height: 4px;
-  left: 5px;
-  top: 2px;
-  background: currentColor;
-  transform-origin: bottom;
-}
-
-.sidebar-link-icon-active::after {
-  content: "";
-  position: absolute;
-  width: 4px;
-  height: 1.5px;
-  left: 5px;
-  top: 6px;
-  background: currentColor;
-  transform: rotate(25deg);
-  transform-origin: left center;
-}
-
-.sidebar-link-icon-completed::before {
-  content: "";
-  position: absolute;
-  width: 5px;
-  height: 2.5px;
-  left: 3px;
-  top: 4px;
-  border-left: 1.5px solid currentColor;
-  border-bottom: 1.5px solid currentColor;
-  transform: rotate(-45deg);
-}
-
-.sidebar-link-icon-overdue::before {
-  content: "!";
-  position: absolute;
-  inset: 0;
-  border: 1.5px solid currentColor;
-  border-radius: 50%;
-  box-sizing: border-box;
-  text-align: center;
-  font-size: 10px;
-  font-weight: 700;
-  line-height: 11px;
+.sidebar-link-icon-completed,
+.sidebar-link-icon-overdue {
+  font-size: 0.9rem;
 }
 
 .workspace-item:focus-visible {
@@ -194,6 +136,10 @@
 .workspace-item:hover {
   background: rgba(255, 255, 255, 0.1);
   color: #fffaf2;
+}
+
+.workspace-item:not(.active):hover .sidebar-link-icon {
+  color: #ffb51b;
 }
 
 .workspace-item:active {
@@ -221,7 +167,7 @@
     color 160ms ease;
 }
 
-.workspace-item:hover .count {
+.workspace-item:not(.active):hover .count {
   background: rgba(255, 181, 27, 0.22);
   color: #ffcf5b;
 }
