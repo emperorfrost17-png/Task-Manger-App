@@ -20,6 +20,8 @@
 
 .breadcrumb {
   gap: 8px;
+  color: #5d4d62;
+  font-weight: 700;
 }
 
 .breadcrumb-dot {

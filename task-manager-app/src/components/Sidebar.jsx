@@ -42,9 +42,9 @@ export function Sidebar() {
       </div>
 
       <div className="user-box">
-        <div className="user-avatar">AR</div>
+        <div className="user-avatar">NE</div>
         <div className="user-meta">
-          <span className="user-name">Ari Rivera</span>
+          <span className="user-name">Nathan Essama</span>
           <span className="user-role">Personal space</span>
         </div>
       </div>
