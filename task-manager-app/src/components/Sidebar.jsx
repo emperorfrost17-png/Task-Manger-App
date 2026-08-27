@@ -1,4 +1,5 @@
 import "./Sidebar.css";
+import dayjs from "dayjs";
 import { NavLink } from "react-router";
 
 export function Sidebar({ tasks }) {
@@ -73,7 +74,9 @@ export function Sidebar({ tasks }) {
             aria-hidden="true"
           />
           <span>Overdue</span>
-          <span className="count">0</span>
+          <span className="count">
+            {tasks.filter((task) => dayjs(task.dueDate).isBefore(dayjs(), "day") && !task.completed).length}
+          </span>
         </NavLink>
       </div>
 
