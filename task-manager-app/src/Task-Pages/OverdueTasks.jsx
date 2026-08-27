@@ -63,7 +63,7 @@ export function OverdueTasks({ tasks }) {
                             <span className="priority-tag">
                               {task.priority}
                             </span>
-                            <span>{dayjs(task.dueDate).format("MMM D")}</span>
+                            <span>{TimeDifferenceDays === 1 ? "1 day ago" : `${TimeDifferenceDays} days ago`}</span>
                           </div>
                         </div>
                       </article>
