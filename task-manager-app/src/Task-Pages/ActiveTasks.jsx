@@ -13,7 +13,7 @@ export function ActiveTasks({ tasks }) {
           <Header />
           <div className="workspace-area">
             <section className="body-main">
-              <p className="date-label">WEDNESDAY, AUGUST 26</p>
+              <p className="date-label">{dayjs().format('dddd, MMMM D')}</p>
               <h1>
                 A little lighter
                 <br />

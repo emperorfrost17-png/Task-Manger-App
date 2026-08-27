@@ -17,9 +17,15 @@
 .panel-label {
   margin: 0;
   color: #397267;
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 800;
   letter-spacing: 0.2em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.date-label {
+  font-weight: 900;
 }
 
 .body-main h1,
