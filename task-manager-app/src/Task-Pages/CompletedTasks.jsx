@@ -1,7 +1,7 @@
 import { Header } from "../components/Header";
 import { Sidebar } from "../components/Sidebar";
 import dayjs from "dayjs";
-export function CompletedTasks({ tasks }) {
+export function CompletedTasks({ tasks, onOpenTaskModal }) {
   return (
     <>
       <title>Completed Tasks</title>
@@ -31,7 +31,7 @@ export function CompletedTasks({ tasks }) {
                     view
                   </p>
                 </div>
-                <button className="add-task-link" type="button">
+                <button className="add-task-link" type="button" onClick={onOpenTaskModal}>
                   <span aria-hidden="true">+</span> Add task
                 </button>
               </div>

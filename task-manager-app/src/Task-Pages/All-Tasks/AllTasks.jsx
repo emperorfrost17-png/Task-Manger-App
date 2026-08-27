@@ -1,22 +1,23 @@
-import AllTasksIcon from "../../assets/all-tasks.png";
 import { Sidebar } from "../../components/Sidebar";
 import { Header } from "../../components/Header";
+
 import "./AllTasks.css";
 import dayjs from "dayjs";
 
-export function AllTasks({ tasks }) {
+export function AllTasks({ tasks, onOpenTaskModal }) {
   return (
     <>
       <title>All Tasks</title>
-      
 
       <div className="app-shell">
         <Sidebar tasks={tasks} />
+
         <main className="main-content">
           <Header />
+
           <div className="workspace-area">
             <section className="body-main">
-              <p className="date-label">{dayjs().format('dddd, MMMM D')}</p>
+              <p className="date-label">{dayjs().format("dddd, MMMM D")}</p>
               <h1>
                 A little lighter
                 <br />
@@ -32,7 +33,12 @@ export function AllTasks({ tasks }) {
                   <h2>All tasks</h2>
                   <p>{tasks.length} things in view</p>
                 </div>
-                <button className="add-task-link" type="button">
+
+                <button
+                  className="add-task-link"
+                  type="button"
+                  onClick={onOpenTaskModal}
+                >
                   <span aria-hidden="true">+</span> Add task
                 </button>
               </div>

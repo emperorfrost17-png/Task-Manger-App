@@ -12,8 +12,9 @@ export function Sidebar({ tasks }) {
           <div className="brand-tagline">make room for what matters</div>
         </div>
       </div>
-
-      <button className="workspace-button">+ New task</button>
+      <NavLink to="/add-task">
+        <button className="workspace-button">+ New task</button>
+      </NavLink>
 
       <div className="sidebar-panel">
         <div className="workspace-label">Your workspace</div>
