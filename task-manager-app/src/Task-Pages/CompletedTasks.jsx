@@ -12,7 +12,7 @@ export function CompletedTasks({ tasks, onOpenTaskModal }) {
           <Header />
           <div className="workspace-area">
             <section className="body-main">
-              <p className="date-label">{dayjs().format('dddd, MMMM D')}</p>
+              <p className="date-label">{dayjs().format("dddd, MMMM D")}</p>
               <h1>
                 A little lighter
                 <br />
@@ -31,7 +31,11 @@ export function CompletedTasks({ tasks, onOpenTaskModal }) {
                     view
                   </p>
                 </div>
-                <button className="add-task-link" type="button" onClick={onOpenTaskModal}>
+                <button
+                  className="add-task-link"
+                  type="button"
+                  onClick={onOpenTaskModal}
+                >
                   <span aria-hidden="true">+</span> Add task
                 </button>
               </div>
@@ -55,6 +59,21 @@ export function CompletedTasks({ tasks, onOpenTaskModal }) {
                             </span>
                             <span>{dayjs(task.dueDate).format("MMM D")}</span>
                           </div>
+                        </div>
+                        <button
+                          className="task-more-button"
+                          type="button"
+                          aria-label={`More options for ${task.title}`}
+                        >
+                          <span aria-hidden="true">...</span>
+                        </button>
+                        <div className="task-options-menu" aria-hidden="true">
+                          <button type="button">
+                            <span aria-hidden="true">✎</span> Edit
+                          </button>
+                          <button type="button">
+                            <i className="fa-solid fa-trash-can" aria-hidden="true" /> Delete
+                          </button>
                         </div>
                       </article>
                     );

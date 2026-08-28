@@ -12,7 +12,7 @@ export function OverdueTasks({ tasks, onOpenTaskModal }) {
           <Header />
           <div className="workspace-area">
             <section className="body-main">
-              <p className="date-label">{dayjs().format('dddd, MMMM D')}</p>
+              <p className="date-label">{dayjs().format("dddd, MMMM D")}</p>
               <h1>
                 A little lighter
                 <br />
@@ -27,11 +27,21 @@ export function OverdueTasks({ tasks, onOpenTaskModal }) {
                 <div>
                   <h2>Overdue tasks</h2>
                   <p>
-                    {tasks.filter((task) => dayjs(task.dueDate).isBefore(dayjs(), "day") && !task.completed).length} {" "}
+                    {
+                      tasks.filter(
+                        (task) =>
+                          dayjs(task.dueDate).isBefore(dayjs(), "day") &&
+                          !task.completed,
+                      ).length
+                    }{" "}
                     things in view
                   </p>
                 </div>
-                <button className="add-task-link" type="button" onClick={onOpenTaskModal}>
+                <button
+                  className="add-task-link"
+                  type="button"
+                  onClick={onOpenTaskModal}
+                >
                   <span aria-hidden="true">+</span> Add task
                 </button>
               </div>
@@ -63,8 +73,27 @@ export function OverdueTasks({ tasks, onOpenTaskModal }) {
                             <span className="priority-tag">
                               {task.priority}
                             </span>
-                            <span>{TimeDifferenceDays === 1 ? "1 day ago" : `${TimeDifferenceDays} days ago`}</span>
+                            <span>
+                              {TimeDifferenceDays === 1
+                                ? "1 day ago"
+                                : `${TimeDifferenceDays} days ago`}
+                            </span>
                           </div>
+                        </div>
+                        <button
+                          className="task-more-button"
+                          type="button"
+                          aria-label={`More options for ${task.title}`}
+                        >
+                          <span aria-hidden="true">...</span>
+                        </button>
+                        <div className="task-options-menu" aria-hidden="true">
+                          <button type="button">
+                            <span aria-hidden="true">✎</span> Edit
+                          </button>
+                          <button type="button">
+                            <i className="fa-solid fa-trash-can" aria-hidden="true" /> Delete
+                          </button>
                         </div>
                       </article>
                     );

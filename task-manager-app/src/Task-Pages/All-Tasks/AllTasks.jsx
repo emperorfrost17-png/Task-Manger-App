@@ -1,10 +1,13 @@
 import { Sidebar } from "../../components/Sidebar";
 import { Header } from "../../components/Header";
-
+import { useState } from "react";
 import "./AllTasks.css";
 import dayjs from "dayjs";
 
 export function AllTasks({ tasks, onOpenTaskModal }) {
+  // State to track which task's options menu is currently open. This state will hold the ID of the task whose menu is open, or null if no menu is open.
+  const [openMenuId, setOpenMenuId] = useState(null);
+
   return (
     <>
       <title>All Tasks</title>
@@ -56,9 +59,36 @@ export function AllTasks({ tasks, onOpenTaskModal }) {
                           <span>{dayjs(task.dueDate).format("MMM D")}</span>
                         </div>
                       </div>
-                      <button className="task-more-button" type="button" aria-label={`More options for ${task.title}`}>
+                      <button
+                        className="task-more-button"
+                        type="button"
+                        aria-label={`More options for ${task.title}`}
+                        onClick={() => {
+                          // Toggle the openMenuId state to show or hide the options menu for the clicked task. If the menu is already open for this task, it will close it; otherwise, it will open it.
+                          setOpenMenuId(
+                            openMenuId === task.id ? null : task.id,
+                          );
+                        }}
+                      >
                         <span aria-hidden="true">...</span>
                       </button>
+                      {/*
+                        Conditionally render the task options menu if the openMenuId matches the current task's ID. This menu provides options to edit or delete the task.
+                      */}
+                      {openMenuId === task.id && (
+                        <div className="task-options-menu" aria-hidden="true">
+                          <button type="button">
+                            <span aria-hidden="true">✎</span> Edit
+                          </button>
+                          <button type="button">
+                            <i
+                              className="fa-solid fa-trash-can"
+                              aria-hidden="true"
+                            />{" "}
+                            Delete
+                          </button>
+                        </div>
+                      )}
                     </article>
                   );
                 })}
