@@ -4,9 +4,10 @@ import { useState } from "react";
 import "./AllTasks.css";
 import dayjs from "dayjs";
 
-export function AllTasks({ tasks, onOpenTaskModal }) {
+export function AllTasks({ tasks, onOpenTaskModal, handleDeleteTask }) {
   // State to track which task's options menu is currently open. This state will hold the ID of the task whose menu is open, or null if no menu is open.
   const [openMenuId, setOpenMenuId] = useState(null);
+
 
   return (
     <>
@@ -80,7 +81,7 @@ export function AllTasks({ tasks, onOpenTaskModal }) {
                           <button type="button">
                             <span aria-hidden="true">✎</span> Edit
                           </button>
-                          <button type="button">
+                          <button type="button" onClick={() => handleDeleteTask(task.id)}>
                             <i
                               className="fa-solid fa-trash-can"
                               aria-hidden="true"

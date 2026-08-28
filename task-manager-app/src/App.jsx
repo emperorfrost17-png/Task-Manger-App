@@ -6,20 +6,28 @@ import { CompletedTasks } from "./Task-Pages/CompletedTasks";
 import { OverdueTasks } from "./Task-Pages/OverdueTasks";
 import { AddTask } from "./components/AddTask";
 
-
 import "./App.css";
 
 function App() {
   const storedTasks = localStorage.getItem("tasks");
-  const [tasks, setTasks] = useState(storedTasks ? JSON.parse(storedTasks) : []);
+  const [tasks, setTasks] = useState(
+    storedTasks ? JSON.parse(storedTasks) : [],
+  );
   const [isTaskModalOpen, setIsTaskModalOpen] = useState(false);
   const onOpenTaskModal = () => {
     setIsTaskModalOpen(true);
   };
   const onCloseTaskModal = () => {
     setIsTaskModalOpen(false);
-  }
-   
+  };
+  // Function to handle the deletion of a task by its ID. It updates the tasks state by filtering out the task with the specified ID.
+
+  //explaination: This function takes a task ID as an argument and updates the tasks state by creating a new array that excludes the task with the matching ID. It uses the filter method to iterate through the current tasks and return only those whose IDs do not match the provided taskIdToDelete. This effectively removes the specified task from the list of tasks.
+  const handleDeleteTask = (taskIdToDelete) => {
+    setTasks((currentTasks) =>
+      currentTasks.filter((task) => task.id !== taskIdToDelete),
+    );
+  };
 
   useEffect(() => {
     // Load tasks from local storage on component mount
@@ -40,32 +48,51 @@ function App() {
       {/*
       this is the main App component that manages the state of tasks and routes to different task pages. It uses React Router for navigation and local storage to persist tasks across sessions. The AddTask component is conditionally rendered based on the isTaskModalOpen state, allowing users to add new tasks. The useEffect hooks handle loading and saving tasks to local storage.
     */}
-      {isTaskModalOpen && <AddTask onClose={onCloseTaskModal} tasks={tasks} setTasks={setTasks} />}
-      
+      {isTaskModalOpen && (
+        <AddTask onClose={onCloseTaskModal} tasks={tasks} setTasks={setTasks} />
+      )}
+
       <Routes>
         <Route
           path="/"
-          element={<AllTasks tasks={tasks} onOpenTaskModal={onOpenTaskModal} />}
+          element={
+            <AllTasks
+              tasks={tasks}
+              onOpenTaskModal={onOpenTaskModal}
+              handleDeleteTask={handleDeleteTask}
+            />
+          }
         />
         <Route
           path="/active"
           element={
-            <ActiveTasks tasks={tasks} onOpenTaskModal={onOpenTaskModal} />
+            <ActiveTasks
+              tasks={tasks}
+              onOpenTaskModal={onOpenTaskModal}
+              handleDeleteTask={handleDeleteTask}
+            />
           }
         />
         <Route
           path="/completed"
           element={
-            <CompletedTasks tasks={tasks} onOpenTaskModal={onOpenTaskModal} />
+            <CompletedTasks
+              tasks={tasks}
+              onOpenTaskModal={onOpenTaskModal}
+              handleDeleteTask={handleDeleteTask}
+            />
           }
         />
         <Route
           path="/overdue"
           element={
-            <OverdueTasks tasks={tasks} onOpenTaskModal={onOpenTaskModal} />
+            <OverdueTasks
+              tasks={tasks}
+              onOpenTaskModal={onOpenTaskModal}
+              handleDeleteTask={handleDeleteTask}
+            />
           }
         />
-       
       </Routes>
     </>
   );

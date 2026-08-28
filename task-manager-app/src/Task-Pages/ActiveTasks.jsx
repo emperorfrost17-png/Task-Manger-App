@@ -1,8 +1,10 @@
 import { Sidebar } from "../components/Sidebar";
 import { Header } from "../components/Header";
+import { useState } from "react";
 import dayjs from "dayjs";
 
-export function ActiveTasks({ tasks, onOpenTaskModal }) {
+export function ActiveTasks({ tasks, onOpenTaskModal, handleDeleteTask }) {
+  const [openMenuId, setOpenMenuId] = useState(null);
   return (
     <>
       <title>Active Tasks</title>
@@ -65,14 +67,17 @@ export function ActiveTasks({ tasks, onOpenTaskModal }) {
                           className="task-more-button"
                           type="button"
                           aria-label={`More options for ${task.title}`}
+                          onClick={() => setOpenMenuId(openMenuId === task.id ? null : task.id)}
                         >
                           <span aria-hidden="true">...</span>
                         </button>
+                        
+                         {openMenuId === task.id && (
                         <div className="task-options-menu" aria-hidden="true">
                           <button type="button">
                             <span aria-hidden="true">✎</span> Edit
                           </button>
-                          <button type="button">
+                          <button type="button" onClick={() => handleDeleteTask(task.id)}>
                             <i
                               className="fa-solid fa-trash-can"
                               aria-hidden="true"
@@ -80,6 +85,7 @@ export function ActiveTasks({ tasks, onOpenTaskModal }) {
                             Delete
                           </button>
                         </div>
+                      )}
                       </article>
                     );
                   })}

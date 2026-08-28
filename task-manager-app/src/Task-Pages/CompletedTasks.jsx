@@ -1,7 +1,9 @@
 import { Header } from "../components/Header";
 import { Sidebar } from "../components/Sidebar";
+import { useState } from "react";
 import dayjs from "dayjs";
-export function CompletedTasks({ tasks, onOpenTaskModal }) {
+export function CompletedTasks({ tasks, onOpenTaskModal, handleDeleteTask }) {
+  const [openMenuId, setOpenMenuId] = useState(null);
   return (
     <>
       <title>Completed Tasks</title>
@@ -64,17 +66,24 @@ export function CompletedTasks({ tasks, onOpenTaskModal }) {
                           className="task-more-button"
                           type="button"
                           aria-label={`More options for ${task.title}`}
+                          onClick={() => setOpenMenuId(openMenuId === task.id ? null : task.id)}
                         >
                           <span aria-hidden="true">...</span>
                         </button>
+                         {openMenuId === task.id && (
                         <div className="task-options-menu" aria-hidden="true">
                           <button type="button">
                             <span aria-hidden="true">✎</span> Edit
                           </button>
-                          <button type="button">
-                            <i className="fa-solid fa-trash-can" aria-hidden="true" /> Delete
+                          <button type="button" onClick={() => handleDeleteTask(task.id)}>
+                            <i
+                              className="fa-solid fa-trash-can"
+                              aria-hidden="true"
+                            />{" "}
+                            Delete
                           </button>
                         </div>
+                      )}
                       </article>
                     );
                   })}
