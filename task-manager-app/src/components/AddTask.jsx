@@ -38,7 +38,7 @@ export function AddTask({ onClose, tasks, setTasks }) {
 
   return (
     <>
-      <main className="add-task-page">
+      <form className="add-task-page">
         <section
           className="add-task-modal"
           role="dialog"
@@ -63,6 +63,7 @@ export function AddTask({ onClose, tasks, setTasks }) {
           <div className="task-field task-title-field">
             <label htmlFor="task-title">What needs your attention?</label>
             <input
+            required
               value={title}
               onChange={savedTaskTitle}
               id="task-title"
@@ -129,7 +130,7 @@ export function AddTask({ onClose, tasks, setTasks }) {
             </button>
           </div>
         </section>
-      </main>
+      </form>
     </>
   );
 }

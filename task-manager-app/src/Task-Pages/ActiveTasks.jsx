@@ -3,7 +3,12 @@ import { Header } from "../components/Header";
 import { useState } from "react";
 import dayjs from "dayjs";
 
-export function ActiveTasks({ tasks, onOpenTaskModal, handleDeleteTask }) {
+export function ActiveTasks({
+  tasks,
+  onOpenTaskModal,
+  handleDeleteTask,
+  handleCompletedTasks,
+}) {
   const [openMenuId, setOpenMenuId] = useState(null);
   return (
     <>
@@ -34,13 +39,7 @@ export function ActiveTasks({ tasks, onOpenTaskModal, handleDeleteTask }) {
                     view
                   </p>
                 </div>
-                <button
-                  className="add-task-link"
-                  type="button"
-                  onClick={onOpenTaskModal}
-                >
-                  <span aria-hidden="true">+</span> Add task
-                </button>
+                
               </div>
 
               <div className="task-list">
@@ -52,7 +51,11 @@ export function ActiveTasks({ tasks, onOpenTaskModal, handleDeleteTask }) {
                   .map((task) => {
                     return (
                       <article className="task-card" key={task.id}>
-                        <span className="task-checkbox" aria-hidden="true" />
+                        <span
+                          className="task-checkbox"
+                          aria-hidden="true"
+                          onClick={() => handleCompletedTasks(task.id)}
+                        />
                         <div>
                           <h3>{task.title}</h3>
                           <p>{task.description}</p>
@@ -67,25 +70,32 @@ export function ActiveTasks({ tasks, onOpenTaskModal, handleDeleteTask }) {
                           className="task-more-button"
                           type="button"
                           aria-label={`More options for ${task.title}`}
-                          onClick={() => setOpenMenuId(openMenuId === task.id ? null : task.id)}
+                          onClick={() =>
+                            setOpenMenuId(
+                              openMenuId === task.id ? null : task.id,
+                            )
+                          }
                         >
                           <span aria-hidden="true">...</span>
                         </button>
-                        
-                         {openMenuId === task.id && (
-                        <div className="task-options-menu" aria-hidden="true">
-                          <button type="button">
-                            <span aria-hidden="true">✎</span> Edit
-                          </button>
-                          <button type="button" onClick={() => handleDeleteTask(task.id)}>
-                            <i
-                              className="fa-solid fa-trash-can"
-                              aria-hidden="true"
-                            />{" "}
-                            Delete
-                          </button>
-                        </div>
-                      )}
+
+                        {openMenuId === task.id && (
+                          <div className="task-options-menu" aria-hidden="true">
+                            <button type="button">
+                              <span aria-hidden="true">✎</span> Edit
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => handleDeleteTask(task.id)}
+                            >
+                              <i
+                                className="fa-solid fa-trash-can"
+                                aria-hidden="true"
+                              />{" "}
+                              Delete
+                            </button>
+                          </div>
+                        )}
                       </article>
                     );
                   })}

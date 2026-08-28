@@ -4,10 +4,15 @@ import { useState } from "react";
 import "./AllTasks.css";
 import dayjs from "dayjs";
 
-export function AllTasks({ tasks, onOpenTaskModal, handleDeleteTask }) {
+export function AllTasks({
+  tasks,
+  onOpenTaskModal,
+  handleDeleteTask,
+  handleCompletedTasks,
+  handleClearCompletedTasks,
+}) {
   // State to track which task's options menu is currently open. This state will hold the ID of the task whose menu is open, or null if no menu is open.
   const [openMenuId, setOpenMenuId] = useState(null);
-
 
   return (
     <>
@@ -37,21 +42,47 @@ export function AllTasks({ tasks, onOpenTaskModal, handleDeleteTask }) {
                   <h2>All tasks</h2>
                   <p>{tasks.length} things in view</p>
                 </div>
-
-                <button
-                  className="add-task-link"
-                  type="button"
-                  onClick={onOpenTaskModal}
-                >
-                  <span aria-hidden="true">+</span> Add task
-                </button>
+                <div className="task-heading-actions">
+                  <button
+                    className="clear-completed-button"
+                    type="button"
+                    onClick={handleClearCompletedTasks}
+                  >
+                    <span aria-hidden="true">
+                      <i className="fa-solid fa-trash-can" aria-hidden="true" />
+                    </span>{" "}
+                    Clear completed tasks
+                  </button>
+                  <button
+                    className="add-task-link"
+                    type="button"
+                    onClick={onOpenTaskModal}
+                  >
+                    <span aria-hidden="true">+</span> Add task
+                  </button>
+                </div>
               </div>
 
               <div className="task-list">
                 {tasks.map((task) => {
                   return (
                     <article className="task-card" key={task.id}>
-                      <span className="task-checkbox" aria-hidden="true" />
+                      {task.completed === true ? (
+                        <span
+                          className="task-complete-icon"
+                          aria-hidden="true"
+                          onClick={() => handleCompletedTasks(task.id)}
+                        >
+                          <i className="fa-solid fa-check" />
+                        </span>
+                      ) : (
+                        <span
+                          className="task-checkbox"
+                          aria-hidden="true"
+                          onClick={() => handleCompletedTasks(task.id)}
+                        />
+                      )}
+
                       <div>
                         <h3>{task.title}</h3>
                         <p>{task.description}</p>
@@ -81,7 +112,10 @@ export function AllTasks({ tasks, onOpenTaskModal, handleDeleteTask }) {
                           <button type="button">
                             <span aria-hidden="true">✎</span> Edit
                           </button>
-                          <button type="button" onClick={() => handleDeleteTask(task.id)}>
+                          <button
+                            type="button"
+                            onClick={() => handleDeleteTask(task.id)}
+                          >
                             <i
                               className="fa-solid fa-trash-can"
                               aria-hidden="true"

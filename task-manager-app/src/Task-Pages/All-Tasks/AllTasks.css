@@ -73,6 +73,14 @@
   font-size: 0.7rem;
 }
 
+.task-heading-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
 .add-task-link {
   border: 0;
   border-radius: 9px;
@@ -97,6 +105,41 @@
 .add-task-link:active {
   background: #cfe5df;
   color: #1e4b43;
+  transform: translateY(1px);
+}
+
+.clear-completed-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid #f1cfc7;
+  border-radius: 9px;
+  padding: 7px 10px;
+  background: #fff8f4;
+  color: #d86b59;
+  font-family: inherit;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.clear-completed-button i {
+  font-size: 0.7rem;
+}
+
+.clear-completed-button:hover {
+  border-color: #e66e5b;
+  background: #ffe1da;
+  color: #b94e3f;
+}
+
+.clear-completed-button:active {
+  background: #f8c9bf;
   transform: translateY(1px);
 }
 
@@ -210,6 +253,19 @@
   border-color: #e9a000;
   box-shadow: 0 0 0 1px #d88e00;
   transform: scale(0.94);
+}
+
+.task-complete-icon {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #ffb51b;
+  color: #34283b;
+  font-size: 0.7rem;
+  cursor: pointer;
 }
 
 .task-card h3 {

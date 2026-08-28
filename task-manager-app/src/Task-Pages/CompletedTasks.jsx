@@ -2,7 +2,13 @@ import { Header } from "../components/Header";
 import { Sidebar } from "../components/Sidebar";
 import { useState } from "react";
 import dayjs from "dayjs";
-export function CompletedTasks({ tasks, onOpenTaskModal, handleDeleteTask }) {
+export function CompletedTasks({
+  tasks,
+  onOpenTaskModal,
+  handleDeleteTask,
+  handleCompletedTasks,
+  handleClearCompletedTasks,
+}) {
   const [openMenuId, setOpenMenuId] = useState(null);
   return (
     <>
@@ -33,13 +39,15 @@ export function CompletedTasks({ tasks, onOpenTaskModal, handleDeleteTask }) {
                     view
                   </p>
                 </div>
-                <button
-                  className="add-task-link"
-                  type="button"
-                  onClick={onOpenTaskModal}
-                >
-                  <span aria-hidden="true">+</span> Add task
-                </button>
+                <div className="task-heading-actions">
+                  <button className="clear-completed-button" type="button" onClick={handleClearCompletedTasks}>
+                    <span aria-hidden="true">
+                      <i className="fa-solid fa-trash-can" aria-hidden="true" />
+                    </span>{" "}
+                    Clear completed tasks
+                  </button>
+                  
+                </div>
               </div>
 
               <div className="task-list">
@@ -51,7 +59,21 @@ export function CompletedTasks({ tasks, onOpenTaskModal, handleDeleteTask }) {
                   .map((task) => {
                     return (
                       <article className="task-card" key={task.id}>
-                        <span className="task-checkbox" aria-hidden="true" />
+                        {task.completed === true ? (
+                          <span
+                            className="task-complete-icon"
+                            aria-hidden="true"
+                            onClick={() => handleCompletedTasks(task.id)}
+                          >
+                            <i className="fa-solid fa-check" />
+                          </span>
+                        ) : (
+                          <span
+                            className="task-checkbox"
+                            aria-hidden="true"
+                            onClick={() => handleCompletedTasks(task.id)}
+                          />
+                        )}
                         <div>
                           <h3>{task.title}</h3>
                           <p>{task.description}</p>
@@ -66,24 +88,31 @@ export function CompletedTasks({ tasks, onOpenTaskModal, handleDeleteTask }) {
                           className="task-more-button"
                           type="button"
                           aria-label={`More options for ${task.title}`}
-                          onClick={() => setOpenMenuId(openMenuId === task.id ? null : task.id)}
+                          onClick={() =>
+                            setOpenMenuId(
+                              openMenuId === task.id ? null : task.id,
+                            )
+                          }
                         >
                           <span aria-hidden="true">...</span>
                         </button>
-                         {openMenuId === task.id && (
-                        <div className="task-options-menu" aria-hidden="true">
-                          <button type="button">
-                            <span aria-hidden="true">✎</span> Edit
-                          </button>
-                          <button type="button" onClick={() => handleDeleteTask(task.id)}>
-                            <i
-                              className="fa-solid fa-trash-can"
-                              aria-hidden="true"
-                            />{" "}
-                            Delete
-                          </button>
-                        </div>
-                      )}
+                        {openMenuId === task.id && (
+                          <div className="task-options-menu" aria-hidden="true">
+                            <button type="button">
+                              <span aria-hidden="true">✎</span> Edit
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => handleDeleteTask(task.id)}
+                            >
+                              <i
+                                className="fa-solid fa-trash-can"
+                                aria-hidden="true"
+                              />{" "}
+                              Delete
+                            </button>
+                          </div>
+                        )}
                       </article>
                     );
                   })}

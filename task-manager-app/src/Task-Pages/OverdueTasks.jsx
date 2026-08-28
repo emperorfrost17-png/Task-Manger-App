@@ -2,7 +2,7 @@ import { Sidebar } from "../components/Sidebar";
 import { Header } from "../components/Header";
 import { useState } from "react";
 import dayjs from "dayjs";
-export function OverdueTasks({ tasks, onOpenTaskModal, handleDeleteTask }) {
+export function OverdueTasks({ tasks, onOpenTaskModal, handleDeleteTask, handleCompletedTasks }) {
   const [openMenuId, setOpenMenuId] = useState(null);
   return (
     <>
@@ -39,13 +39,7 @@ export function OverdueTasks({ tasks, onOpenTaskModal, handleDeleteTask }) {
                     things in view
                   </p>
                 </div>
-                <button
-                  className="add-task-link"
-                  type="button"
-                  onClick={onOpenTaskModal}
-                >
-                  <span aria-hidden="true">+</span> Add task
-                </button>
+                
               </div>
 
               <div className="task-list">
@@ -67,7 +61,11 @@ export function OverdueTasks({ tasks, onOpenTaskModal, handleDeleteTask }) {
                     );
                     return (
                       <article className="task-card" key={task.id}>
-                        <span className="task-checkbox" aria-hidden="true" />
+                        <span
+                          className="task-checkbox"
+                          aria-hidden="true"
+                          onClick={() => handleCompletedTasks(task.id)}
+                        />
                         <div>
                           <h3>{task.title}</h3>
                           <p>{task.description}</p>

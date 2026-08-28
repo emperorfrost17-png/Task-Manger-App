@@ -28,7 +28,19 @@ function App() {
       currentTasks.filter((task) => task.id !== taskIdToDelete),
     );
   };
-
+  const handleCompletedTasks = (completedTasksId) => {
+    setTasks((currentTasks) =>
+      currentTasks.map((task) =>
+        // This function takes a task ID as an argument and updates the tasks state by toggling the completed status of the task with the matching ID. It uses the map method to iterate through the current tasks and return a new array where the task with the specified ID has its completed property inverted (true becomes false, and false becomes true). All other tasks remain unchanged.
+        task.id === completedTasksId
+          ? { ...task, completed: !task.completed }
+          : task,
+      ),
+    );
+  };
+  const handleClearCompletedTasks = () => {
+    setTasks((currentTasks) => currentTasks.filter((task) => !task.completed));
+  };
   useEffect(() => {
     // Load tasks from local storage on component mount
     const storedTasks = localStorage.getItem("tasks");
@@ -60,6 +72,8 @@ function App() {
               tasks={tasks}
               onOpenTaskModal={onOpenTaskModal}
               handleDeleteTask={handleDeleteTask}
+              handleCompletedTasks={handleCompletedTasks}
+              handleClearCompletedTasks={handleClearCompletedTasks}
             />
           }
         />
@@ -70,6 +84,7 @@ function App() {
               tasks={tasks}
               onOpenTaskModal={onOpenTaskModal}
               handleDeleteTask={handleDeleteTask}
+              handleCompletedTasks={handleCompletedTasks}
             />
           }
         />
@@ -80,6 +95,8 @@ function App() {
               tasks={tasks}
               onOpenTaskModal={onOpenTaskModal}
               handleDeleteTask={handleDeleteTask}
+              handleCompletedTasks={handleCompletedTasks}
+              handleClearCompletedTasks={handleClearCompletedTasks}
             />
           }
         />
@@ -90,6 +107,7 @@ function App() {
               tasks={tasks}
               onOpenTaskModal={onOpenTaskModal}
               handleDeleteTask={handleDeleteTask}
+              handleCompletedTasks={handleCompletedTasks}
             />
           }
         />
