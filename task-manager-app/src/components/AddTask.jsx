@@ -1,9 +1,43 @@
 import "./AddTask.css";
+import { useState } from "react";
 
-export function AddTask({ onClose }) {
+export function AddTask({ onClose, tasks, setTasks }) {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [priority, setPriority] = useState("MEDIUM");
+  const [dueDate, setDueDate] = useState("");
+  function savedTaskTitle(event) {
+    setTitle(event.target.value);
+  }
+  function savedTaskDescription(event) {
+    setDescription(event.target.value);
+  }
+  function savedTaskPriority(event) {
+    setPriority(event.target.value);
+  }
+  function savedTaskDueDate(event) {
+    setDueDate(event.target.value);
+  }
+  const addNewTask = (event) => {
+    event.preventDefault();
+    // Create a new task object with the current state values and a unique ID, then update the tasks state and close the modal.
+    const newTask = [
+      ...tasks,
+      {
+        id: crypto.randomUUID(),
+        title: title,
+        description: description,
+        priority: priority,
+        dueDate: dueDate,
+        completed: false,
+      },
+    ];
+    setTasks(newTask);
+    onClose();
+  };
+
   return (
     <>
-      <title>Add Task</title>
       <main className="add-task-page">
         <section
           className="add-task-modal"
@@ -29,6 +63,8 @@ export function AddTask({ onClose }) {
           <div className="task-field task-title-field">
             <label htmlFor="task-title">What needs your attention?</label>
             <input
+              value={title}
+              onChange={savedTaskTitle}
               id="task-title"
               type="text"
               placeholder="Give it a clear, kind name"
@@ -43,13 +79,20 @@ export function AddTask({ onClose }) {
               id="task-notes"
               placeholder="A little context for future you"
               rows="3"
+              value={description}
+              onChange={savedTaskDescription}
             />
           </div>
 
           <div className="task-form-row">
             <div className="task-field">
               <label htmlFor="task-priority">Priority</label>
-              <select id="task-priority" defaultValue="MEDIUM">
+              <select
+                id="task-priority"
+                defaultValue="MEDIUM"
+                value={priority}
+                onChange={savedTaskPriority}
+              >
                 <option value="LOW">Low - gentle pace</option>
                 <option value="MEDIUM">Medium - worth attention</option>
                 <option value="HIGH">High - needs focus</option>
@@ -58,16 +101,30 @@ export function AddTask({ onClose }) {
 
             <div className="task-field">
               <label htmlFor="task-due-date">Due date</label>
-              <input id="task-due-date" type="date" placeholder="27/08/2026" />
+              <input
+                id="task-due-date"
+                type="date"
+                placeholder="27/08/2026"
+                value={dueDate}
+                onChange={savedTaskDueDate}
+              />
             </div>
           </div>
 
           <div className="add-task-actions">
-            <button className="cancel-task-button" type="button" onClick={onClose}>
+            <button
+              className="cancel-task-button"
+              type="button"
+              onClick={onClose}
+            >
               Cancel
             </button>
 
-            <button className="save-task-button" type="button">
+            <button
+              className="save-task-button"
+              type="button"
+              onClick={addNewTask}
+            >
               Add task
             </button>
           </div>

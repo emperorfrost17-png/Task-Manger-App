@@ -10,7 +10,7 @@ export function AllTasks({ tasks, onOpenTaskModal }) {
       <title>All Tasks</title>
 
       <div className="app-shell">
-        <Sidebar tasks={tasks} />
+        <Sidebar tasks={tasks} onOpenTaskModal={onOpenTaskModal} />
 
         <main className="main-content">
           <Header />
@@ -56,6 +56,9 @@ export function AllTasks({ tasks, onOpenTaskModal }) {
                           <span>{dayjs(task.dueDate).format("MMM D")}</span>
                         </div>
                       </div>
+                      <button className="task-more-button" type="button" aria-label={`More options for ${task.title}`}>
+                        <span aria-hidden="true">...</span>
+                      </button>
                     </article>
                   );
                 })}

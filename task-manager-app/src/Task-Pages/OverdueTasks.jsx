@@ -7,7 +7,7 @@ export function OverdueTasks({ tasks, onOpenTaskModal }) {
       <title>Overdue Tasks</title>
 
       <div className="app-shell">
-        <Sidebar tasks={tasks} />
+        <Sidebar tasks={tasks} onOpenTaskModal={onOpenTaskModal} />
         <main className="main-content">
           <Header />
           <div className="workspace-area">

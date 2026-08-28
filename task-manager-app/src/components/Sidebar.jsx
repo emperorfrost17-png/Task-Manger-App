@@ -2,7 +2,7 @@ import "./Sidebar.css";
 import dayjs from "dayjs";
 import { NavLink } from "react-router";
 
-export function Sidebar({ tasks }) {
+export function Sidebar({ tasks, onOpenTaskModal }) {
   return (
     <aside className="sidebar">
       <div className="brand-box">
@@ -12,9 +12,11 @@ export function Sidebar({ tasks }) {
           <div className="brand-tagline">make room for what matters</div>
         </div>
       </div>
-      <NavLink to="/add-task">
-        <button className="workspace-button">+ New task</button>
-      </NavLink>
+      
+        <button className="workspace-button" onClick={onOpenTaskModal}>
+          + New task
+        </button>
+      
 
       <div className="sidebar-panel">
         <div className="workspace-label">Your workspace</div>
