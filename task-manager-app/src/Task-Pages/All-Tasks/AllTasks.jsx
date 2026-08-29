@@ -1,18 +1,20 @@
 import { Sidebar } from "../../components/Sidebar";
 import { Header } from "../../components/Header";
-import { useState } from "react";
 import "./AllTasks.css";
 import dayjs from "dayjs";
 
 export function AllTasks({
   tasks,
   onOpenTaskModal,
+  onOpenEditTaskModal,
   handleDeleteTask,
   handleCompletedTasks,
   handleClearCompletedTasks,
+  openMenuId,
+  setOpenMenuId,
 }) {
   // State to track which task's options menu is currently open. This state will hold the ID of the task whose menu is open, or null if no menu is open.
-  const [openMenuId, setOpenMenuId] = useState(null);
+  
 
   return (
     <>
@@ -109,7 +111,7 @@ export function AllTasks({
                       */}
                       {openMenuId === task.id && (
                         <div className="task-options-menu" aria-hidden="true">
-                          <button type="button">
+                          <button type="button" onClick={() => onOpenEditTaskModal(task)}>
                             <span aria-hidden="true">✎</span> Edit
                           </button>
                           <button

@@ -21,6 +21,10 @@ export function AddTask({ onClose, tasks, setTasks }) {
   const addNewTask = (event) => {
     event.preventDefault();
     // Create a new task object with the current state values and a unique ID, then update the tasks state and close the modal.
+    if (!title ||  !priority || !dueDate) {
+      alert("Please fill in mandatory fields before adding a task.");
+      return;
+    }
     const newTask = [
       ...tasks,
       {

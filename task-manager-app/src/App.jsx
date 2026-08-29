@@ -5,6 +5,7 @@ import { ActiveTasks } from "./Task-Pages/ActiveTasks";
 import { CompletedTasks } from "./Task-Pages/CompletedTasks";
 import { OverdueTasks } from "./Task-Pages/OverdueTasks";
 import { AddTask } from "./components/AddTask";
+import { EditTask } from "./components/EditTask";
 
 import "./App.css";
 
@@ -14,6 +15,17 @@ function App() {
     storedTasks ? JSON.parse(storedTasks) : [],
   );
   const [isTaskModalOpen, setIsTaskModalOpen] = useState(false);
+  const [isEditTaskModalOpen, setIsEditTaskModalOpen] = useState(false);
+  const [editingTask, setEditingTask] = useState(null);
+  const [openMenuId, setOpenMenuId] = useState(null);
+  const onOpenEditTaskModal = (task) => {
+    setEditingTask(task); // Set the task to be edited in state
+    setIsEditTaskModalOpen(true);
+    setOpenMenuId(null); // Close the options menu when opening the edit modal
+  };
+  const onCloseEditTaskModal = () => {
+    setIsEditTaskModalOpen(false);
+  };
   const onOpenTaskModal = () => {
     setIsTaskModalOpen(true);
   };
@@ -63,6 +75,13 @@ function App() {
       {isTaskModalOpen && (
         <AddTask onClose={onCloseTaskModal} tasks={tasks} setTasks={setTasks} />
       )}
+      {isEditTaskModalOpen && (
+        <EditTask
+          onClose={onCloseEditTaskModal}
+          setTasks={setTasks}
+          task={editingTask} // Pass the task to be edited as a prop to the EditTask component
+        />
+      )}
 
       <Routes>
         <Route
@@ -71,6 +90,9 @@ function App() {
             <AllTasks
               tasks={tasks}
               onOpenTaskModal={onOpenTaskModal}
+              onOpenEditTaskModal={onOpenEditTaskModal}
+              openMenuId={openMenuId}
+              setOpenMenuId={setOpenMenuId}
               handleDeleteTask={handleDeleteTask}
               handleCompletedTasks={handleCompletedTasks}
               handleClearCompletedTasks={handleClearCompletedTasks}
@@ -83,6 +105,9 @@ function App() {
             <ActiveTasks
               tasks={tasks}
               onOpenTaskModal={onOpenTaskModal}
+              onOpenEditTaskModal={onOpenEditTaskModal}
+              openMenuId={openMenuId}
+              setOpenMenuId={setOpenMenuId}
               handleDeleteTask={handleDeleteTask}
               handleCompletedTasks={handleCompletedTasks}
             />
@@ -94,6 +119,9 @@ function App() {
             <CompletedTasks
               tasks={tasks}
               onOpenTaskModal={onOpenTaskModal}
+              onOpenEditTaskModal={onOpenEditTaskModal}
+              openMenuId={openMenuId}
+              setOpenMenuId={setOpenMenuId}
               handleDeleteTask={handleDeleteTask}
               handleCompletedTasks={handleCompletedTasks}
               handleClearCompletedTasks={handleClearCompletedTasks}
@@ -106,6 +134,9 @@ function App() {
             <OverdueTasks
               tasks={tasks}
               onOpenTaskModal={onOpenTaskModal}
+              onOpenEditTaskModal={onOpenEditTaskModal}
+              openMenuId={openMenuId}
+              setOpenMenuId={setOpenMenuId}
               handleDeleteTask={handleDeleteTask}
               handleCompletedTasks={handleCompletedTasks}
             />

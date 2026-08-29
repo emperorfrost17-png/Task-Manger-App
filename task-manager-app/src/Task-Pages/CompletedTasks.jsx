@@ -1,15 +1,18 @@
 import { Header } from "../components/Header";
 import { Sidebar } from "../components/Sidebar";
-import { useState } from "react";
+
 import dayjs from "dayjs";
 export function CompletedTasks({
   tasks,
   onOpenTaskModal,
+  onOpenEditTaskModal,
   handleDeleteTask,
   handleCompletedTasks,
   handleClearCompletedTasks,
+  openMenuId,
+  setOpenMenuId,
 }) {
-  const [openMenuId, setOpenMenuId] = useState(null);
+
   return (
     <>
       <title>Completed Tasks</title>
@@ -98,7 +101,7 @@ export function CompletedTasks({
                         </button>
                         {openMenuId === task.id && (
                           <div className="task-options-menu" aria-hidden="true">
-                            <button type="button">
+                            <button type="button" onClick={() => onOpenEditTaskModal(task)}>
                               <span aria-hidden="true">✎</span> Edit
                             </button>
                             <button

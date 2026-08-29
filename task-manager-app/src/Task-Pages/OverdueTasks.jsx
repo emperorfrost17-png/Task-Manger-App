@@ -1,9 +1,16 @@
 import { Sidebar } from "../components/Sidebar";
 import { Header } from "../components/Header";
-import { useState } from "react";
+
 import dayjs from "dayjs";
-export function OverdueTasks({ tasks, onOpenTaskModal, handleDeleteTask, handleCompletedTasks }) {
-  const [openMenuId, setOpenMenuId] = useState(null);
+export function OverdueTasks({
+  tasks,
+  onOpenTaskModal,
+  onOpenEditTaskModal,
+  handleDeleteTask,
+  handleCompletedTasks,
+  openMenuId,
+  setOpenMenuId,
+}) {
   return (
     <>
       <title>Overdue Tasks</title>
@@ -39,7 +46,6 @@ export function OverdueTasks({ tasks, onOpenTaskModal, handleDeleteTask, handleC
                     things in view
                   </p>
                 </div>
-                
               </div>
 
               <div className="task-list">
@@ -84,24 +90,31 @@ export function OverdueTasks({ tasks, onOpenTaskModal, handleDeleteTask, handleC
                           className="task-more-button"
                           type="button"
                           aria-label={`More options for ${task.title}`}
-                          onClick={() => setOpenMenuId(openMenuId === task.id ? null : task.id)}
+                          onClick={() =>
+                            setOpenMenuId(
+                              openMenuId === task.id ? null : task.id,
+                            )
+                          }
                         >
                           <span aria-hidden="true">...</span>
                         </button>
-                         {openMenuId === task.id && (
-                        <div className="task-options-menu" aria-hidden="true">
-                          <button type="button">
-                            <span aria-hidden="true">✎</span> Edit
-                          </button>
-                          <button type="button" onClick={() => handleDeleteTask(task.id)}>
-                            <i
-                              className="fa-solid fa-trash-can"
-                              aria-hidden="true"
-                            />{" "}
-                            Delete
-                          </button>
-                        </div>
-                      )}
+                        {openMenuId === task.id && (
+                          <div className="task-options-menu" aria-hidden="true">
+                            <button type="button" onClick={() => onOpenEditTaskModal(task)}>
+                              <span aria-hidden="true">✎</span> Edit
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => handleDeleteTask(task.id)}
+                            >
+                              <i
+                                className="fa-solid fa-trash-can"
+                                aria-hidden="true"
+                              />{" "}
+                              Delete
+                            </button>
+                          </div>
+                        )}
                       </article>
                     );
                   })}
