@@ -1,6 +1,6 @@
 import "./Header.css";
 
-export function Header() {
+export function Header({ onOpenTaskModal }) {
   return (
     <header className="header">
       <div className="breadcrumb" aria-label="Current location">
@@ -15,7 +15,7 @@ export function Header() {
           <span className="search-icon" aria-hidden="true" />
           <input type="search" placeholder="Search your tasks" />
         </label>
-        <button className="header-new-task" type="button">
+        <button className="header-new-task" type="button" onClick={onOpenTaskModal}>
           <span aria-hidden="true">+</span>
           New task
         </button>

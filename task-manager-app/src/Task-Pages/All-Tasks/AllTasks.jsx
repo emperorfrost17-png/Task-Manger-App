@@ -24,7 +24,7 @@ export function AllTasks({
         <Sidebar tasks={tasks} onOpenTaskModal={onOpenTaskModal} />
 
         <main className="main-content">
-          <Header />
+          <Header onOpenTaskModal={onOpenTaskModal}   />
 
           <div className="workspace-area">
             <section className="body-main">

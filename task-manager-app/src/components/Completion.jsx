@@ -1,11 +1,38 @@
+import dayjs from "dayjs";
 export function Completion({ tasks }) {
+  const completedTasks = tasks.filter((task) => task.completed);
+  const totalTasks = tasks.length;
+  const completionPercentage =
+    totalTasks > 0 ? Math.round((completedTasks.length / totalTasks) * 100) : 0;
+
   return (
     <aside className="body-side">
       <div className="day-progress">
-        <div className="progress-ring">0%</div>
+        <svg className="progress-ring" viewBox="0 0 44 44">
+          <circle cx="22" cy="22" r="18" className="progress-bg" />
+          <circle
+            cx="22"
+            cy="22"
+            r="18"
+            className="progress-fill"
+            style={{
+              strokeDashoffset: 113 - (113 * completionPercentage) / 100,
+            }}
+          />
+          <text
+            x="22"
+            y="26"
+            className="progress-text"
+            transform="rotate(90 22 22)"
+          >
+            {completionPercentage}%
+          </text>
+        </svg>
         <div>
           <p>YOUR DAY</p>
-          <strong>0 of 0 complete</strong>
+          <strong>
+            {completedTasks.length} of {totalTasks} complete
+          </strong>
         </div>
       </div>
       <div className="rhythm-card">
@@ -17,10 +44,10 @@ export function Completion({ tasks }) {
         </h2>
         <div className="progress-row">
           <span>Progress</span>
-          <strong>0%</strong>
+          <strong>{completionPercentage}%</strong>
         </div>
         <div className="progress-track">
-          <span />
+          <span style={{ width: `${completionPercentage}%` }} />
         </div>
         <p className="panel-copy">
           Pick one thing to begin. Momentum follows clarity.
@@ -33,15 +60,20 @@ export function Completion({ tasks }) {
             <span className="upcoming-label-text">COMING UP</span>
           </p>
         </div>
-        <div className="upcoming-event">
-          <h3>Book a proper lunch break</h3>
-          <p>Thursday, August 27</p>
-        </div>
-        <hr />
-        <div className="upcoming-event">
-          <h3>Reply to Mira about the launch plan</h3>
-          <p>Saturday, August 29</p>
-        </div>
+        {tasks.filter((task) => !task.completed).length === 0 && (
+          <p className="upcoming-empty">
+            The horizon is clear. Nice work keeping it that way.
+          </p>
+        )}
+        {tasks
+          .filter((task) => !task.completed)
+          .slice(0, 2)
+          .map((task) => (
+            <div className="upcoming-event" key={task.id}>
+              <h3>{task.title}</h3>
+              <p>{dayjs(task.dueDate).format("dddd, MMMM D")}</p>
+            </div>
+          ))}
       </div>
     </aside>
   );

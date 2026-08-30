@@ -1,11 +1,12 @@
 import "./AddTask.css";
 import { useState } from "react";
+import dayjs from "dayjs";
 
 export function AddTask({ onClose, tasks, setTasks }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState("MEDIUM");
-  const [dueDate, setDueDate] = useState("");
+  const [dueDate, setDueDate] = useState(dayjs().format("YYYY-MM-DD")); // Set default due date to today
   function savedTaskTitle(event) {
     setTitle(event.target.value);
   }
