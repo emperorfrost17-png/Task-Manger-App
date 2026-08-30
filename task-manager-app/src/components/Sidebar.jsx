@@ -12,11 +12,10 @@ export function Sidebar({ tasks, onOpenTaskModal }) {
           <div className="brand-tagline">make room for what matters</div>
         </div>
       </div>
-      
-        <button className="workspace-button" onClick={onOpenTaskModal}>
-          + New task
-        </button>
-      
+
+      <button className="workspace-button" onClick={onOpenTaskModal}>
+        + New task
+      </button>
 
       <div className="sidebar-panel">
         <div className="workspace-label">Your workspace</div>
@@ -78,13 +77,25 @@ export function Sidebar({ tasks, onOpenTaskModal }) {
           />
           <span>Overdue</span>
           <span className="count">
-            {tasks.filter((task) => dayjs(task.dueDate).isBefore(dayjs(), "day") && !task.completed).length}
+            {
+              tasks.filter(
+                (task) =>
+                  dayjs(task.dueDate).isBefore(dayjs(), "day") &&
+                  !task.completed,
+              ).length
+            }
           </span>
         </NavLink>
       </div>
 
       <div className="sidebar-footer-card">
-        <p>You don't have to carry the whole week today.</p>
+        <p className="sidebar-footer-label">
+          <i className="fa-solid fa-lightbulb" aria-hidden="true" /> A SMALL
+          NOTE
+        </p>
+        <p className="sidebar-footer-text">
+          You don't have to carry the whole week today.
+        </p>
       </div>
 
       <div className="user-box">

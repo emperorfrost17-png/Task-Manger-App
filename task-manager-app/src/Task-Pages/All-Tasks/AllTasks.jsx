@@ -1,5 +1,6 @@
 import { Sidebar } from "../../components/Sidebar";
 import { Header } from "../../components/Header";
+import {Completion} from "../../components/Completion";
 import "./AllTasks.css";
 import dayjs from "dayjs";
 
@@ -14,7 +15,6 @@ export function AllTasks({
   setOpenMenuId,
 }) {
   // State to track which task's options menu is currently open. This state will hold the ID of the task whose menu is open, or null if no menu is open.
-  
 
   return (
     <>
@@ -89,7 +89,11 @@ export function AllTasks({
                         <h3>{task.title}</h3>
                         <p>{task.description}</p>
                         <div className="task-meta">
-                          <span className="priority-tag">{task.priority}</span>
+                          <span
+                            className={`priority-tag priority-tag-${task.priority}`}
+                          >
+                            {task.priority}
+                          </span>
                           <span>{dayjs(task.dueDate).format("MMM D")}</span>
                         </div>
                       </div>
@@ -111,7 +115,10 @@ export function AllTasks({
                       */}
                       {openMenuId === task.id && (
                         <div className="task-options-menu" aria-hidden="true">
-                          <button type="button" onClick={() => onOpenEditTaskModal(task)}>
+                          <button
+                            type="button"
+                            onClick={() => onOpenEditTaskModal(task)}
+                          >
                             <span aria-hidden="true">✎</span> Edit
                           </button>
                           <button
@@ -131,51 +138,8 @@ export function AllTasks({
                 })}
               </div>
             </section>
-
-            <aside className="body-side">
-              <div className="day-progress">
-                <div className="progress-ring">0%</div>
-                <div>
-                  <p>YOUR DAY</p>
-                  <strong>0 of 0 complete</strong>
-                </div>
-              </div>
-              <div className="rhythm-card">
-                <p className="panel-label">TODAY'S RHYTHM</p>
-                <h2>
-                  Focus, then
-                  <br />
-                  let go.
-                </h2>
-                <div className="progress-row">
-                  <span>Progress</span>
-                  <strong>0%</strong>
-                </div>
-                <div className="progress-track">
-                  <span />
-                </div>
-                <p className="panel-copy">
-                  Pick one thing to begin. Momentum follows clarity.
-                </p>
-              </div>
-              <div className="upcoming-card">
-                <div className="upcoming-header">
-                  <p className="panel-label upcoming-label">
-                    <span className="calendar-icon" aria-hidden="true" />
-                    <span className="upcoming-label-text">COMING UP</span>
-                  </p>
-                </div>
-                <div className="upcoming-event">
-                  <h3>Book a proper lunch break</h3>
-                  <p>Thursday, August 27</p>
-                </div>
-                <hr />
-                <div className="upcoming-event">
-                  <h3>Reply to Mira about the launch plan</h3>
-                  <p>Saturday, August 29</p>
-                </div>
-              </div>
-            </aside>
+            <Completion tasks={tasks} />
+            
           </div>
         </main>
       </div>

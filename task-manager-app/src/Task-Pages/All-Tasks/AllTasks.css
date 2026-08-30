@@ -300,6 +300,16 @@
   letter-spacing: 0.08em;
 }
 
+.priority-tag-MEDIUM {
+  background: #fef3c7;
+  color: #2b2a2a;
+}
+
+.priority-tag-LOW {
+  background: #d4ebe4;
+  color: #2d6a5e;
+}
+
 .body-side {
   display: grid;
   align-content: start;
