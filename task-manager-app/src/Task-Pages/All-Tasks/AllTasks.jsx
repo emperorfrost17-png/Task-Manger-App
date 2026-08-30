@@ -1,6 +1,7 @@
 import { Sidebar } from "../../components/Sidebar";
 import { Header } from "../../components/Header";
 import {Completion} from "../../components/Completion";
+
 import "./AllTasks.css";
 import dayjs from "dayjs";
 
@@ -24,7 +25,7 @@ export function AllTasks({
         <Sidebar tasks={tasks} onOpenTaskModal={onOpenTaskModal} />
 
         <main className="main-content">
-          <Header onOpenTaskModal={onOpenTaskModal}   />
+          <Header onOpenTaskModal={onOpenTaskModal} currentPage="All tasks" />
 
           <div className="workspace-area">
             <section className="body-main">

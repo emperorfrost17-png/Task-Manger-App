@@ -1,14 +1,10 @@
 import "./Header.css";
+import { Breadcrumbs } from "./Breadcrumbs";
 
-export function Header({ onOpenTaskModal }) {
+export function Header({ onOpenTaskModal, currentPage }) {
   return (
     <header className="header">
-      <div className="breadcrumb" aria-label="Current location">
-        <span className="breadcrumb-dot" aria-hidden="true" />
-        <span>Personal space</span>
-        <span className="breadcrumb-separator">/</span>
-        <span>All tasks</span>
-      </div>
+      <Breadcrumbs currentPage={currentPage} />
 
       <div className="header-actions">
         <label className="search-box">

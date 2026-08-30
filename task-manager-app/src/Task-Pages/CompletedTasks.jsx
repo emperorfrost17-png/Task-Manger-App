@@ -21,7 +21,7 @@ export function CompletedTasks({
       <div className="app-shell">
         <Sidebar tasks={tasks} onOpenTaskModal={onOpenTaskModal} />
         <main className="main-content">
-          <Header onOpenTaskModal={onOpenTaskModal} />
+          <Header onOpenTaskModal={onOpenTaskModal} currentPage="Completed tasks" />
           <div className="workspace-area">
             <section className="body-main">
               <p className="date-label">{dayjs().format("dddd, MMMM D")}</p>
