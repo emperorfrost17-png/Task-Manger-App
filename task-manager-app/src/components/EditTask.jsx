@@ -128,7 +128,7 @@ export function EditTask({ onClose, setTasks, task }) {
           <button
             className="edit-task-save"
             type="button"
-            onClick={ handleSaveChanges}
+            onClick={handleSaveChanges}
           >
             Save changes
           </button>
