@@ -18,6 +18,7 @@ function App() {
   const [isEditTaskModalOpen, setIsEditTaskModalOpen] = useState(false);
   const [editingTask, setEditingTask] = useState(null);
   const [openMenuId, setOpenMenuId] = useState(null);
+  const [sortBy, setSortBy] = useState("priority"); // Default sorting by priority
   const onOpenEditTaskModal = (task) => {
     setEditingTask(task); // Set the task to be edited in state
     setIsEditTaskModalOpen(true);
@@ -53,6 +54,23 @@ function App() {
   const handleClearCompletedTasks = () => {
     setTasks((currentTasks) => currentTasks.filter((task) => !task.completed));
   };
+  const handleSortChange = (event) => {
+    const nextSortBy = event.target.value;
+    setSortBy(nextSortBy);
+  };
+  const sortedTasks = [...tasks].sort((a, b) => {
+    if (sortBy === "priority") {
+      const priorityOrder = { HIGH: 1, MEDIUM: 2, LOW: 3 };
+      return priorityOrder[a.priority] - priorityOrder[b.priority];
+    }
+    if (sortBy === "dueDate") {
+      return new Date(a.dueDate) - new Date(b.dueDate);
+    }
+    if (sortBy === "title") {
+      return a.title.localeCompare(b.title);
+    }
+    return 0;
+  });
   useEffect(() => {
     // Load tasks from local storage on component mount
     const storedTasks = localStorage.getItem("tasks");
@@ -96,6 +114,9 @@ function App() {
               handleDeleteTask={handleDeleteTask}
               handleCompletedTasks={handleCompletedTasks}
               handleClearCompletedTasks={handleClearCompletedTasks}
+              handleSortChange={handleSortChange}
+              sortBy={sortBy}
+              sortedTasks={sortedTasks}
             />
           }
         />

@@ -1,7 +1,7 @@
 import { Sidebar } from "../../components/Sidebar";
 import { Header } from "../../components/Header";
 import {Completion} from "../../components/Completion";
-
+import {Sorting} from "../../components/Sorting";
 import "./AllTasks.css";
 import dayjs from "dayjs";
 
@@ -14,6 +14,9 @@ export function AllTasks({
   handleClearCompletedTasks,
   openMenuId,
   setOpenMenuId,
+  sortBy,
+  handleSortChange,
+  sortedTasks,
 }) {
   // State to track which task's options menu is currently open. This state will hold the ID of the task whose menu is open, or null if no menu is open.
 
@@ -65,9 +68,9 @@ export function AllTasks({
                   </button>
                 </div>
               </div>
-
+              <Sorting tasks={tasks} handleSortChange={handleSortChange} sortBy={sortBy} />
               <div className="task-list">
-                {tasks.map((task) => {
+                {sortedTasks.map((task) => {
                   return (
                     <article className="task-card" key={task.id}>
                       {task.completed === true ? (
