@@ -1,7 +1,7 @@
 import { Sidebar } from "../../components/Sidebar";
 import { Header } from "../../components/Header";
-import {Completion} from "../../components/Completion";
-import {Sorting} from "../../components/Sorting";
+import { Completion } from "../../components/Completion";
+import { Sorting } from "../../components/Sorting";
 import "./AllTasks.css";
 import dayjs from "dayjs";
 
@@ -68,11 +68,15 @@ export function AllTasks({
                   </button>
                 </div>
               </div>
-              <Sorting  handleSortChange={handleSortChange} sortBy={sortBy} />
+              <Sorting handleSortChange={handleSortChange} sortBy={sortBy} />
               <div className="task-list">
                 {sortedTasks.map((task) => {
                   return (
-                    <article className="task-card" key={task.id}>
+                    <article
+                      className="task-card"
+                      key={task.id}
+                      style={{ opacity: task.completed ? "0.7" : "1" }}
+                    >
                       {task.completed === true ? (
                         <span
                           className="task-complete-icon"
@@ -90,7 +94,15 @@ export function AllTasks({
                       )}
 
                       <div>
-                        <h3>{task.title}</h3>
+                        <h3
+                          style={{
+                            textDecoration: task.completed
+                              ? "line-through"
+                              : "none",
+                          }}
+                        >
+                          {task.title}
+                        </h3>
                         <p>{task.description}</p>
                         <div className="task-meta">
                           <span
@@ -143,7 +155,6 @@ export function AllTasks({
               </div>
             </section>
             <Completion tasks={tasks} />
-            
           </div>
         </main>
       </div>

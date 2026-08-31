@@ -17,7 +17,6 @@ export function CompletedTasks({
   handleSortChange,
   sortedTasks,
 }) {
-
   return (
     <>
       <title>Completed Tasks</title>
@@ -25,7 +24,10 @@ export function CompletedTasks({
       <div className="app-shell">
         <Sidebar tasks={tasks} onOpenTaskModal={onOpenTaskModal} />
         <main className="main-content">
-          <Header onOpenTaskModal={onOpenTaskModal} currentPage="Completed tasks" />
+          <Header
+            onOpenTaskModal={onOpenTaskModal}
+            currentPage="Completed tasks"
+          />
           <div className="workspace-area">
             <section className="body-main">
               <p className="date-label">{dayjs().format("dddd, MMMM D")}</p>
@@ -48,19 +50,19 @@ export function CompletedTasks({
                   </p>
                 </div>
                 <div className="task-heading-actions">
-                  <button className="clear-completed-button" type="button" onClick={handleClearCompletedTasks}>
+                  <button
+                    className="clear-completed-button"
+                    type="button"
+                    onClick={handleClearCompletedTasks}
+                  >
                     <span aria-hidden="true">
                       <i className="fa-solid fa-trash-can" aria-hidden="true" />
                     </span>{" "}
                     Clear completed tasks
                   </button>
-                  
                 </div>
               </div>
-              <Sorting
-                handleSortChange={handleSortChange}
-                sortBy={sortBy}
-              />
+              <Sorting handleSortChange={handleSortChange} sortBy={sortBy} />
               <div className="task-list">
                 {/*
                     Filter the tasks to only show those with a status of "active"
@@ -69,7 +71,11 @@ export function CompletedTasks({
                   .filter((task) => task.completed)
                   .map((task) => {
                     return (
-                      <article className="task-card" key={task.id}>
+                      <article
+                        className="task-card"
+                        key={task.id}
+                        style={{ opacity: "0.7" }}
+                      >
                         {task.completed === true ? (
                           <span
                             className="task-complete-icon"
@@ -86,10 +92,14 @@ export function CompletedTasks({
                           />
                         )}
                         <div>
-                          <h3>{task.title}</h3>
+                          <h3 style={{ textDecoration: "line-through" }}>
+                            {task.title}
+                          </h3>
                           <p>{task.description}</p>
                           <div className="task-meta">
-                            <span className={`priority-tag priority-tag-${task.priority}`}>
+                            <span
+                              className={`priority-tag priority-tag-${task.priority}`}
+                            >
                               {task.priority}
                             </span>
                             <span>{dayjs(task.dueDate).format("MMM D")}</span>
@@ -109,7 +119,10 @@ export function CompletedTasks({
                         </button>
                         {openMenuId === task.id && (
                           <div className="task-options-menu" aria-hidden="true">
-                            <button type="button" onClick={() => onOpenEditTaskModal(task)}>
+                            <button
+                              type="button"
+                              onClick={() => onOpenEditTaskModal(task)}
+                            >
                               <span aria-hidden="true">✎</span> Edit
                             </button>
                             <button
