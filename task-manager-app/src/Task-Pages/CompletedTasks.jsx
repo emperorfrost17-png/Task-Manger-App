@@ -4,6 +4,8 @@ import { Completion } from "../components/Completion";
 import { Sorting } from "../components/Sorting";
 
 import dayjs from "dayjs";
+import { useState } from "react";
+
 export function CompletedTasks({
   tasks,
   onOpenTaskModal,
@@ -15,18 +17,38 @@ export function CompletedTasks({
   setOpenMenuId,
   sortBy,
   handleSortChange,
-  sortedTasks,
+  searchQuery,
+  handleSearchChange,
+  filteredTasks,
 }) {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  const closeSidebar = () => {
+    setIsSidebarOpen(false);
+  };
+
   return (
     <>
       <title>Completed Tasks</title>
 
       <div className="app-shell">
-        <Sidebar tasks={tasks} onOpenTaskModal={onOpenTaskModal} />
+        <Sidebar
+          tasks={tasks}
+          onOpenTaskModal={onOpenTaskModal}
+          isSidebarOpen={isSidebarOpen}
+          onCloseSidebar={closeSidebar}
+        />
         <main className="main-content">
           <Header
             onOpenTaskModal={onOpenTaskModal}
             currentPage="Completed tasks"
+            onToggleSidebar={toggleSidebar}
+            searchQuery={searchQuery}
+            handleSearchChange={handleSearchChange}
           />
           <div className="workspace-area">
             <section className="body-main">
@@ -67,7 +89,7 @@ export function CompletedTasks({
                 {/*
                     Filter the tasks to only show those with a status of "active"
                   */}
-                {sortedTasks
+                {filteredTasks
                   .filter((task) => task.completed)
                   .map((task) => {
                     return (
@@ -103,6 +125,7 @@ export function CompletedTasks({
                               {task.priority}
                             </span>
                             <span>{dayjs(task.dueDate).format("MMM D")}</span>
+                            <span> Created At: {task.createdAt}</span>
                           </div>
                         </div>
                         <button

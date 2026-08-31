@@ -68,3 +68,61 @@
 .sortby option {
   font-weight: 600;
 }
+
+/* Responsive Design Media Queries */
+
+/* Mobile devices (< 481px) */
+@media (max-width: 480px) {
+  .sortby {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+    margin: 0 0 14px;
+  }
+
+  .sortby-label {
+    font-size: 0.68rem;
+  }
+
+  .sortby select {
+    min-width: 100px;
+    padding: 8px 30px 8px 10px;
+    font-size: 0.68rem;
+  }
+}
+
+/* Tablets (481px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  .sortby {
+    gap: 12px;
+    margin: 0 0 16px;
+  }
+
+  .sortby-label {
+    font-size: 0.7rem;
+  }
+
+  .sortby select {
+    min-width: 120px;
+    font-size: 0.7rem;
+  }
+}
+
+/* Small laptops (769px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .sortby {
+    gap: 10px;
+  }
+
+  .sortby select {
+    min-width: 126px;
+  }
+}
+
+/* Desktops and extra-large screens (1025px+) */
+@media (min-width: 1025px) {
+  .sortby {
+    gap: 10px;
+    margin: 0 0 18px;
+  }
+}

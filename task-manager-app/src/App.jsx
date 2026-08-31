@@ -19,7 +19,8 @@ function App() {
   const [isEditTaskModalOpen, setIsEditTaskModalOpen] = useState(false);
   const [editingTask, setEditingTask] = useState(null);
   const [openMenuId, setOpenMenuId] = useState(null);
-  const [sortBy, setSortBy] = useState("priority"); // Default sorting by priority
+  const [sortBy, setSortBy] = useState("dateCreated"); // Default sorting by "none"
+  const [searchQuery, setSearchQuery] = useState(""); // State for search query
   const onOpenEditTaskModal = (task) => {
     setEditingTask(task); // Set the task to be edited in state
     setIsEditTaskModalOpen(true);
@@ -60,6 +61,15 @@ function App() {
     setSortBy(nextSortBy);
   };
   const sortedTasks = [...tasks].sort((a, b) => {
+    // First, sort by completion status: incomplete tasks come first
+    if (a.completed !== b.completed) {
+      // If a is completed and b is not, a should come after b (return 1)
+      // If a is not completed and b is, a should come before b (return -1)
+      return a.completed ? 1 : -1;
+    }
+    if (sortBy === "dateCreated") {
+      return dayjs(a.createdAt).diff(dayjs(b.createdAt));
+    }
     if (sortBy === "priority") {
       const priorityOrder = { HIGH: 1, MEDIUM: 2, LOW: 3 };
       return priorityOrder[a.priority] - priorityOrder[b.priority];
@@ -72,6 +82,12 @@ function App() {
     }
     return 0;
   });
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+  const filteredTasks = sortedTasks.filter((task) =>
+    task.title.toLowerCase().includes(searchQuery.toLowerCase()),
+  );
   useEffect(() => {
     // Load tasks from local storage on component mount
     const storedTasks = localStorage.getItem("tasks");
@@ -118,6 +134,9 @@ function App() {
               handleSortChange={handleSortChange}
               sortBy={sortBy}
               sortedTasks={sortedTasks}
+              searchQuery={searchQuery}
+              handleSearchChange={handleSearchChange}
+              filteredTasks={filteredTasks}
             />
           }
         />
@@ -135,6 +154,9 @@ function App() {
               handleSortChange={handleSortChange}
               sortBy={sortBy}
               sortedTasks={sortedTasks}
+              searchQuery={searchQuery}
+              handleSearchChange={handleSearchChange}
+              filteredTasks={filteredTasks}
             />
           }
         />
@@ -153,6 +175,9 @@ function App() {
               handleSortChange={handleSortChange}
               sortBy={sortBy}
               sortedTasks={sortedTasks}
+              searchQuery={searchQuery}
+              handleSearchChange={handleSearchChange}
+              filteredTasks={filteredTasks}
             />
           }
         />
@@ -170,6 +195,9 @@ function App() {
               handleSortChange={handleSortChange}
               sortBy={sortBy}
               sortedTasks={sortedTasks}
+              searchQuery={searchQuery}
+              handleSearchChange={handleSearchChange}
+              filteredTasks={filteredTasks}
             />
           }
         />

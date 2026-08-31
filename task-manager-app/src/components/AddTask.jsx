@@ -22,12 +22,11 @@ export function AddTask({ onClose, tasks, setTasks }) {
   const addNewTask = (event) => {
     event.preventDefault();
     // Create a new task object with the current state values and a unique ID, then update the tasks state and close the modal.
-    if (!title ||  !priority || !dueDate) {
+    if (!title || !priority || !dueDate) {
       alert("Please fill in mandatory fields before adding a task.");
       return;
     }
     const newTask = [
-      ...tasks,
       {
         id: crypto.randomUUID(),
         title: title,
@@ -35,7 +34,9 @@ export function AddTask({ onClose, tasks, setTasks }) {
         priority: priority,
         dueDate: dueDate,
         completed: false,
+        createdAt: dayjs().format("h:mm A"),
       },
+      ...tasks,
     ];
     setTasks(newTask);
     onClose();
@@ -68,7 +69,7 @@ export function AddTask({ onClose, tasks, setTasks }) {
           <div className="task-field task-title-field">
             <label htmlFor="task-title">What needs your attention?</label>
             <input
-            required
+              required
               value={title}
               onChange={savedTaskTitle}
               id="task-title"
@@ -95,7 +96,6 @@ export function AddTask({ onClose, tasks, setTasks }) {
               <label htmlFor="task-priority">Priority</label>
               <select
                 id="task-priority"
-                defaultValue="MEDIUM"
                 value={priority}
                 onChange={savedTaskPriority}
               >

@@ -12,6 +12,9 @@ export function Sorting({ handleSortChange, sortBy }) {
 
       <div className="sortby-select-wrap">
         <select id="sort"  aria-label="Sort tasks by" value={sortBy} onChange={handleSortChange}>
+          <option value="dateCreated" >
+            Created At
+          </option>
           <option value="priority" >
             Priority
           </option>

@@ -105,3 +105,70 @@ body {
   border: 0;
   border-top: 1px solid #eee3d6;
 }
+
+/* Responsive Design Media Queries */
+
+/* Mobile devices (< 481px) */
+@media (max-width: 480px) {
+  .app-shell {
+    flex-direction: row;
+  }
+
+  .main-content {
+    flex: 1;
+    width: 100%;
+  }
+
+  .upcoming-card {
+    padding: 12px;
+    margin-bottom: 12px;
+  }
+
+  .upcoming-card h3 {
+    font-size: 0.75rem;
+  }
+
+  .upcoming-card p {
+    font-size: 0.65rem;
+  }
+
+  .upcoming-label {
+    font-size: 0.6rem;
+  }
+}
+
+/* Tablets (481px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  .upcoming-card {
+    padding: 16px;
+  }
+
+  .upcoming-card h3 {
+    font-size: 0.8rem;
+  }
+
+  .upcoming-card p {
+    font-size: 0.68rem;
+  }
+}
+
+/* Small laptops (769px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .upcoming-card {
+    padding: 16px;
+  }
+}
+
+/* Desktops (1025px - 1200px) */
+@media (min-width: 1025px) and (max-width: 1200px) {
+  .upcoming-card {
+    padding: 18px;
+  }
+}
+
+/* Extra large screens (1201px+) */
+@media (min-width: 1201px) {
+  .upcoming-card {
+    padding: 18px;
+  }
+}

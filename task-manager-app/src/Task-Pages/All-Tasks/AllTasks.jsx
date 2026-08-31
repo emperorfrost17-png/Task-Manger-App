@@ -4,6 +4,7 @@ import { Completion } from "../../components/Completion";
 import { Sorting } from "../../components/Sorting";
 import "./AllTasks.css";
 import dayjs from "dayjs";
+import { useState } from "react";
 
 export function AllTasks({
   tasks,
@@ -16,19 +17,41 @@ export function AllTasks({
   setOpenMenuId,
   sortBy,
   handleSortChange,
-  sortedTasks,
+  searchQuery,
+  handleSearchChange,
+  filteredTasks,
 }) {
-  // State to track which task's options menu is currently open. This state will hold the ID of the task whose menu is open, or null if no menu is open.
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  const closeSidebar = () => {
+    setIsSidebarOpen(false);
+  };
 
   return (
     <>
       <title>All Tasks</title>
 
       <div className="app-shell">
-        <Sidebar tasks={tasks} onOpenTaskModal={onOpenTaskModal} />
+        <Sidebar
+          tasks={tasks}
+          onOpenTaskModal={onOpenTaskModal}
+          isSidebarOpen={isSidebarOpen}
+          onCloseSidebar={closeSidebar}
+        />
 
         <main className="main-content">
-          <Header onOpenTaskModal={onOpenTaskModal} currentPage="All tasks" />
+          <Header
+            onOpenTaskModal={onOpenTaskModal}
+            currentPage="All tasks"
+            onToggleSidebar={toggleSidebar}
+            searchQuery={searchQuery}
+            handleSearchChange={handleSearchChange}
+
+          />
 
           <div className="workspace-area">
             <section className="body-main">
@@ -70,7 +93,26 @@ export function AllTasks({
               </div>
               <Sorting handleSortChange={handleSortChange} sortBy={sortBy} />
               <div className="task-list">
-                {sortedTasks.map((task) => {
+                {!filteredTasks ||
+                  (filteredTasks.length === 0 && (
+                    <div className="empty-state">
+                      <div className="empty-state-icon">
+                        <i className="fa-solid fa-inbox" aria-hidden="true" />
+                      </div>
+                      <h2 className="empty-state-title">Nothing here yet</h2>
+                      <p className="empty-state-subtitle">
+                        A lighter plan starts with one clear next step.
+                      </p>
+                      <button
+                        className="empty-state-button"
+                        type="button"
+                        onClick={onOpenTaskModal}
+                      >
+                        <span aria-hidden="true">+</span> Add a task
+                      </button>
+                    </div>
+                  ))}
+                {filteredTasks.map((task) => {
                   return (
                     <article
                       className="task-card"
@@ -111,6 +153,7 @@ export function AllTasks({
                             {task.priority}
                           </span>
                           <span>{dayjs(task.dueDate).format("MMM D")}</span>
+                          <span> Created At: {task.createdAt}</span>
                         </div>
                       </div>
                       <button
