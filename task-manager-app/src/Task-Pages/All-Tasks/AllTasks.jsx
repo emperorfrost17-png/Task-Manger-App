@@ -68,7 +68,7 @@ export function AllTasks({
                   </button>
                 </div>
               </div>
-              <Sorting tasks={tasks} handleSortChange={handleSortChange} sortBy={sortBy} />
+              <Sorting  handleSortChange={handleSortChange} sortBy={sortBy} />
               <div className="task-list">
                 {sortedTasks.map((task) => {
                   return (

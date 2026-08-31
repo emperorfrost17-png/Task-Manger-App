@@ -1,6 +1,7 @@
 import { Sidebar } from "../components/Sidebar";
 import { Header } from "../components/Header";
-import {Completion} from "../components/Completion";
+import { Completion } from "../components/Completion";
+import { Sorting } from "../components/Sorting";
 import dayjs from "dayjs";
 
 export function ActiveTasks({
@@ -11,8 +12,10 @@ export function ActiveTasks({
   handleCompletedTasks,
   openMenuId,
   setOpenMenuId,
+  handleSortChange,
+  sortBy,
+  sortedTasks,
 }) {
-  
   return (
     <>
       <title>Active Tasks</title>
@@ -20,7 +23,10 @@ export function ActiveTasks({
       <div className="app-shell">
         <Sidebar tasks={tasks} onOpenTaskModal={onOpenTaskModal} />
         <main className="main-content">
-          <Header onOpenTaskModal={onOpenTaskModal} currentPage="Active tasks" />
+          <Header
+            onOpenTaskModal={onOpenTaskModal}
+            currentPage="Active tasks"
+          />
           <div className="workspace-area">
             <section className="body-main">
               <p className="date-label">{dayjs().format("dddd, MMMM D")}</p>
@@ -42,14 +48,16 @@ export function ActiveTasks({
                     view
                   </p>
                 </div>
-                
               </div>
-
+              <Sorting
+                handleSortChange={handleSortChange}
+                sortBy={sortBy}
+              />
               <div className="task-list">
                 {/*
                     Filter the tasks to only show those with a status of "active"
                   */}
-                {tasks
+                {sortedTasks
                   .filter((task) => !task.completed)
                   .map((task) => {
                     return (
@@ -63,7 +71,9 @@ export function ActiveTasks({
                           <h3>{task.title}</h3>
                           <p>{task.description}</p>
                           <div className="task-meta">
-                            <span className={`priority-tag priority-tag-${task.priority}`}>
+                            <span
+                              className={`priority-tag priority-tag-${task.priority}`}
+                            >
                               {task.priority}
                             </span>
                             <span>{dayjs(task.dueDate).format("MMM D")}</span>
@@ -84,7 +94,10 @@ export function ActiveTasks({
 
                         {openMenuId === task.id && (
                           <div className="task-options-menu" aria-hidden="true">
-                            <button type="button" onClick={() => onOpenEditTaskModal(task)}>
+                            <button
+                              type="button"
+                              onClick={() => onOpenEditTaskModal(task)}
+                            >
                               <span aria-hidden="true">✎</span> Edit
                             </button>
                             <button

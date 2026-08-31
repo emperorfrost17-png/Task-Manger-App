@@ -1,6 +1,7 @@
 import { Header } from "../components/Header";
 import { Sidebar } from "../components/Sidebar";
 import { Completion } from "../components/Completion";
+import { Sorting } from "../components/Sorting";
 
 import dayjs from "dayjs";
 export function CompletedTasks({
@@ -12,6 +13,9 @@ export function CompletedTasks({
   handleClearCompletedTasks,
   openMenuId,
   setOpenMenuId,
+  sortBy,
+  handleSortChange,
+  sortedTasks,
 }) {
 
   return (
@@ -53,12 +57,15 @@ export function CompletedTasks({
                   
                 </div>
               </div>
-
+              <Sorting
+                handleSortChange={handleSortChange}
+                sortBy={sortBy}
+              />
               <div className="task-list">
                 {/*
                     Filter the tasks to only show those with a status of "active"
                   */}
-                {tasks
+                {sortedTasks
                   .filter((task) => task.completed)
                   .map((task) => {
                     return (

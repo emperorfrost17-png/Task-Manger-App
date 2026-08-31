@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router";
 import { useState, useEffect } from "react";
+import dayjs from "dayjs";
 import { AllTasks } from "./Task-Pages/All-Tasks/AllTasks";
 import { ActiveTasks } from "./Task-Pages/ActiveTasks";
 import { CompletedTasks } from "./Task-Pages/CompletedTasks";
@@ -64,7 +65,7 @@ function App() {
       return priorityOrder[a.priority] - priorityOrder[b.priority];
     }
     if (sortBy === "dueDate") {
-      return new Date(a.dueDate) - new Date(b.dueDate);
+      return dayjs(a.dueDate).diff(dayjs(b.dueDate));
     }
     if (sortBy === "title") {
       return a.title.localeCompare(b.title);
@@ -131,6 +132,9 @@ function App() {
               setOpenMenuId={setOpenMenuId}
               handleDeleteTask={handleDeleteTask}
               handleCompletedTasks={handleCompletedTasks}
+              handleSortChange={handleSortChange}
+              sortBy={sortBy}
+              sortedTasks={sortedTasks}
             />
           }
         />
@@ -146,6 +150,9 @@ function App() {
               handleDeleteTask={handleDeleteTask}
               handleCompletedTasks={handleCompletedTasks}
               handleClearCompletedTasks={handleClearCompletedTasks}
+              handleSortChange={handleSortChange}
+              sortBy={sortBy}
+              sortedTasks={sortedTasks}
             />
           }
         />
@@ -160,6 +167,9 @@ function App() {
               setOpenMenuId={setOpenMenuId}
               handleDeleteTask={handleDeleteTask}
               handleCompletedTasks={handleCompletedTasks}
+              handleSortChange={handleSortChange}
+              sortBy={sortBy}
+              sortedTasks={sortedTasks}
             />
           }
         />

@@ -1,6 +1,7 @@
 import { Sidebar } from "../components/Sidebar";
 import { Header } from "../components/Header";
 import { Completion } from "../components/Completion";
+import { Sorting } from "../components/Sorting";
 import dayjs from "dayjs";
 export function OverdueTasks({
   tasks,
@@ -10,6 +11,9 @@ export function OverdueTasks({
   handleCompletedTasks,
   openMenuId,
   setOpenMenuId,
+  handleSortChange,
+  sortBy,
+  sortedTasks,
 }) {
   return (
     <>
@@ -47,12 +51,15 @@ export function OverdueTasks({
                   </p>
                 </div>
               </div>
-
+              <Sorting
+                handleSortChange={handleSortChange}
+                sortBy={sortBy}
+              />
               <div className="task-list">
                 {/*
                     Filter the tasks to only show those with a status of "active"
                   */}
-                {tasks
+                {sortedTasks
                   // Filter the tasks to only show those that are overdue and not completed
                   //I added 'day' after dayjs() to ensure that the comparison is done at the day level, ignoring the time aspect.
                   .filter(
@@ -61,7 +68,7 @@ export function OverdueTasks({
                       !task.completed,
                   )
                   .map((task) => {
-                    const TimeDifferenceMs = dayjs().valueOf() - task.dueDate;
+                    const TimeDifferenceMs = dayjs().valueOf() - dayjs(task.dueDate).valueOf();
                     const TimeDifferenceDays = Math.floor(
                       TimeDifferenceMs / (1000 * 60 * 60 * 24),
                     );
