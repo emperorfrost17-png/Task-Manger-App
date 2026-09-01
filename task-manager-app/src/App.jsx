@@ -86,6 +86,7 @@ function App() {
     setSearchQuery(event.target.value);
   };
   const filteredTasks = sortedTasks.filter((task) =>
+    // Filter the tasks based on the search query. It checks if the task title includes the search query (case-insensitive) and returns only those tasks that match the criteria.
     task.title.toLowerCase().includes(searchQuery.toLowerCase()),
   );
   useEffect(() => {
